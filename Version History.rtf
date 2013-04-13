@@ -1,0 +1,193 @@
+{\rtf1\mac\ansicpg10000\cocoartf824\cocoasubrtf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Bold;\f1\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww17260\viewh14600\viewkind0
+\pard\tx1440\tx2880\tx4320\tx5760\tx7200\ql\qnatural
+
+\f0\b\fs24 \cf0 \ul \ulc0 JPEGDeux 1.8\
+\
+
+\f1\b0 \ulnone \'a5 
+\f0\b No longer crashes on startup when plist files contains list of files from previous run.\
+\ul \
+
+\f1\b0 \ulnone \'a5 
+\f0\b Fixed minor GUI issues related to the 'Display in' and 'Image quality' fields.\ul \
+\
+\pard\tx1440\tx2880\tx4320\tx5760\tx7200\ql\qnatural
+
+\f1\b0 \cf0 \ulnone \'a5 
+\f0\b Built with XCode 2.1 which should allow program to run natively on an Intel based Mac.\ul \
+\
+JPEGDeux 1.7b\
+\
+
+\f1\b0 \ulnone \'a5 
+\f0\b Support for displaying comments found in jpegs\
+
+\f1\b0     By request.  Enable it in the main window, and you can drag it around during the show.
+\f0\b \
+\ul \
+
+\f1\b0 \ulnone \'a5 
+\f0\b Support for a few transitions\ul \
+
+\f1\b0 \ulnone      Ultimately, I hope to have the full power of Quicktime transitions available, but until then, these are nice.  Look in the Transitions drawer from the Slideshow menu.\
+\
+\'a5 
+\f0\b Uses aliases rather than paths\ul \
+
+\f1\b0 \ulnone       But not pervasively: it stores references to images as aliases, but still uses paths internally.  The upshot is that if you open a slideshow and then move some images, you will have to reopen the slideshow for it to find the images again.\
+\
+\'a5 
+\f0\b Support for sequences of web-based images\
+
+\f1\b0       Choose Slideshow->Add Online Images.  Specify the full URLs of the first and the last images in the numbered sequence, complete with the http://.\
+\
+For example, set First URL to\
+http://java.sun.com/docs/books/tutorial/figures/uiswing/painting/T1.gif\
+and Last URL to\
+http://java.sun.com/docs/books/tutorial/figures/uiswing/painting/T10.gif\
+then turn precache and looping on, and enjoy the animation!  It's particularly irritating in the Dock.\
+
+\f0\b \ul \
+JPEGDeux 1.6.1\
+\
+
+\f1\b0 \ulnone \'a5 
+\f0\b Fixed 10.1.5 incompatibility\
+
+\f1\b0      The code used new Cocoa features only in Jaguar.  Under 10.1.5, they are now simulated using Carbon.
+\f0\b \ul \
+\
+JPEGDeux 1.6
+\f1\b0 \ulnone \
+\
+\'a5 
+\f0\b Fixed bug in move-to-trash code under Jaguar\
+\
+\'a5\'caUndo and Redo\
+\
+\'a5 Image Sorting\
+
+\f1\b0      Several of you asked for it; here it is.  Read the note about it below.
+\f0\b \
+\
+\'a5\'caFlatten Image Hierarchy command\
+
+\f1\b0      This takes all the images out of the folders and puts them in one long list.\
+\
+
+\f0\b \'a5\'caReverse Image List\
+
+\f1\b0      This recursively reverses the order of all images within their own folders.  Useful if you wish to sort backwards.\
+\
+
+\f0\b \'a5\'caReverse Selected Images\
+
+\f1\b0      This reverses the selected images only.  It is not recursive.\
+\
+
+\f0\b \'a5\'caRemove All Images command\
+
+\f1\b0      Some people couldn't find or didn't like the select-all, hit delete way of removing images.\
+\
+
+\fs28 \ul Sorting Note\
+\
+
+\fs24 \ulnone JPEGDeux 1.6 adds the ability to sort loaded images.  Sorting does not work like the Finder: the sorting is not maintained.  If you sort the images, then make changes, you will have to resort them.\
+\
+Sort by name, by date modified, and by date created should be self explanatory, but by number bears explanation.  Sort by number attempts to interpret the beginning of the file name as a number and sort it by the number.  Files without a number are sorted by name, after all the files with numbers.  For example, the following files:\
+\
+9.jpg\
+10.jpg\
+11.jpg\
+\
+would be sorted as above for "by number," but would be sorted as\
+\
+10.jpg\
+11.jpg\
+9.jpg\
+\
+if sorted "by name."\
+\
+Sort All is recursive; Sort Selected is not.  Images are always sorted in their own folders.\
+\
+
+\f0\b \ul JPEGDeux 1.5
+\f1\b0 \ulnone \
+\
+\'a5 
+\f0\b Started keeping track of version history\
+
+\f1\b0      Heh heh heh...\
+\
+\'a5 
+\f0\b Saving and Loading slideshows\
+
+\f1\b0      It works like any Mac application.  Note that JPEGDeux shows do not have or need any preferred file extension.\
+\
+\'a5 
+\f0\b Custom keybindings\
+
+\f1\b0      You can assign and reassign keys to various actions in the Preferences.\
+\
+\'a5 
+\f0\b Force cancel\
+
+\f1\b0      You can always immediately end a slideshow by hitting command-period, regardless of custom keybindings.\
+\
+\'a5 
+\f0\b Rotations and flipping\
+
+\f1\b0      You can rotate and flip the current image.  Hit 'r' to rotate 90\'a1 CCW, and 'e' to rotate CW.  Hit 'h' to flip horizontally, and 'v' to flip vertically.  These keys are customizable in the Preferences.\
+\
+\'a5 
+\f0\b Move or Copy to arbitrary folders\
+
+\f1\b0      You can assign keys to do these in the Preferences.\
+\
+\'a5 
+\f0\b Custom background color\
+
+\f1\b0      You can set this in the main window.\
+\
+\'a5 
+\f0\b Precacheing\
+
+\f1\b0      Precacheing improves the speed of a slideshow, at the cost of greater memory usage.  Turn this on in the main window.  See Precacheing Note below.\
+\
+\'a5 
+\f0\b Image preview drawer\
+
+\f1\b0      Toggle it in the Slideshow menu.\
+\
+\'a5 
+\f0\b Hierarchical image list\
+
+\f1\b0      The image list works like the List View in the Finder.\
+\
+\'a5 
+\f0\b Better drag and drop\
+
+\f1\b0      You can now rearrange images in the slideshow via drag and drop\
+\
+\'a5 
+\f0\b QuickTime show\
+
+\f1\b0      A new full-screen show.  See QuickTime Note below.\
+\
+
+\fs28 \ul Precacheing Note
+\fs24 \ulnone \
+\
+JPEGDeux 1.5 adds support for precacheing.  If you click the precacheing checkbox, JPEGDeux will load all the images and render them at the proper size before the show starts.  This means that images can be displayed very quickly, but the downside is that it can require a great deal of memory.  If you decide to precache, JPEGDeux will estimate the amount of memory required and will warn you if it appears to require more than 75 megabytes.  Try precacheing the Dock Show!\
+\
+
+\fs28 \ul QuickTime Note
+\fs24 \ulnone \
+\
+JPEGDeux 1.5 adds preliminary support for a new type of show, called the QuickTime Show.  A QuickTime Show uses QuickTime to directly render the images, rather than going through the Cocoa library.  This allows greater flexibility;  for example, the QuickTime show supports a varying image quality, which the user can adjust on the main window.  Ultimately, QuickTime shows will allow a variety of transitions between images, like iPhoto, and will work full screen or in a window.\
+\
+The current QuickTime show renders directly to the entire screen.  As a result, you cannot switch to another application while a QuickTime show is running.  Also, the QuickTime show currently always uses black for its background color, incorrectly scales rotated images, and precaches very poorly.  These bugs will be fixed in a future version.}

@@ -1,0 +1,18 @@
+{
+    IBClasses = (
+        {
+            CLASS = DefaultTransitionChooser; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {myView = NSView; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = ScreenShowTransitionChooser; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {myTransitionSpeed = NSSlider; myTransitionType = NSPopUpButton; }; 
+            SUPERCLASS = DefaultTransitionChooser; 
+        }
+    ); 
+    IBVersion = 1; 
+}

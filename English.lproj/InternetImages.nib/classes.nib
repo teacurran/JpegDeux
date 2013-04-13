@@ -1,0 +1,18 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {addImages = id; cancel = id; }; 
+            CLASS = NetImageAdder; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                myAddButton = NSButton; 
+                myFirstURLField = NSTextField; 
+                myLastURLField = NSTextField; 
+                myWindow = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

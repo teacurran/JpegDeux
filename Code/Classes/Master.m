@@ -10,7 +10,7 @@
 #import "WindowShow.h"
 #import "ScreenShow.h"
 #import "DockShow.h"
-#import "FSQTShow.h"
+//#import "FSQTShow.h"
 #import "DirectDisplayShow.h"
 #import "MutableArrayCategory.h"
 #import "StringAdditions.h"
@@ -122,8 +122,9 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [myQualitySlider setFloatValue:myQuality];
     [myShouldPrecacheButton setIntValue:myShouldPrecache];
     [myShouldRecursivelyScanSubdirectoriesButton setIntValue:myShouldRecursivelyScanSubdirectories];
-    if ([myDisplayModeClass inheritsFromClass:[QuicktimeShow class]]) [myQualitySlider setEnabled:YES];
-    else [myQualitySlider setEnabled:NO];
+    //if ([myDisplayModeClass inheritsFromClass:[QuicktimeShow class]]) [myQualitySlider setEnabled:YES];
+    //else [myQualitySlider setEnabled:NO];
+	[myQualitySlider setEnabled:NO];
     [myFilesTable reloadData];
     [myPreview setImageScaling:myScaling];
     [myDisplayCommentButton setIntValue:myCommentDisplay];
@@ -154,7 +155,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 - (void)loadFromDictionary:(NSDictionary*)dict {
     int tag;
     NSArray* oldFiles;
-    const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class], [DirectDisplayShow class], [FSQTShow class]};
+    const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class], [DirectDisplayShow class]};
     myShouldLoop=[dict boolForKey:@"ShouldLoop"];
     myShouldRandomize=[dict boolForKey:@"ShouldRandom"];
     myTimeInterval=[dict floatForKey:@"TimeInterval"];
@@ -248,10 +249,11 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (IBAction)setDisplayMode:(id)sender {
-    const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class], [DirectDisplayShow class], [FSQTShow class]};
+    const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class], [DirectDisplayShow class]};
     myDisplayModeClass=classes[[[sender selectedCell] tag]%numShowTypes]; // for paranoia
-    if ([myDisplayModeClass inheritsFromClass:[QuicktimeShow class]]) [myQualitySlider setEnabled:YES];
-    else [myQualitySlider setEnabled:NO];
+    //if ([myDisplayModeClass inheritsFromClass:[QuicktimeShow class]]) [myQualitySlider setEnabled:YES];
+    //else [myQualitySlider setEnabled:NO];
+	[myQualitySlider setEnabled:NO];
     [self loadTransitionChooser];
 }
 
@@ -429,47 +431,61 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     const BOOL drawerIsOpen=([myDrawer state]==NSDrawerOpenState || [myDrawer state]==NSDrawerOpeningState);
     [myWindow orderOut:self];
     date=[NSDate date];
-    NS_DURING
+	
+    @try {
         do {
             NSEvent* event=nil;
             BOOL shouldContinue=YES;
             [myCurrentShow rewind:-1];
-            if (myShouldRandomize) [myCurrentShow reshuffle];
+            if (myShouldRandomize) {
+				[myCurrentShow reshuffle];
+			}
+
             while (shouldContinue) {
                 NSDate* finishDate;
                 CFAbsoluteTime timeOfDisplay;
                 EventAction action;
                 pool=[[NSAutoreleasePool alloc] init];
                 shouldContinue=[myCurrentShow advanceImage:&timeOfDisplay];
-reeval: //we jump here when something's changed.  Not pretty
-                    action=eNothing;
-                if (myShouldAutoAdvance) finishDate=[NSDate dateWithTimeIntervalSinceReferenceDate: myTimeInterval + timeOfDisplay];
-                else finishDate=[NSDate distantFuture];
+
+				action=eNothing;
+                if (myShouldAutoAdvance) {
+					finishDate=[NSDate dateWithTimeIntervalSinceReferenceDate: myTimeInterval + timeOfDisplay];
+				} else {
+					finishDate=[NSDate distantFuture];
+				}
+				
                 do {
                     event=[application nextEventMatchingMask: NSAnyEventMask
                                                    untilDate:finishDate
                                                       inMode:NSDefaultRunLoopMode
                                                      dequeue:YES];
                 } while (event && !(action=[self handleEvent:event]));
+				
                 [pool release];
                 pool=nil;
                 switch (action) {
                     case eStop:
-                        goto finish;
+						myShouldLoop=NO;
+						shouldContinue=NO;
+						break;
                     case ePrev:
                         shouldContinue=YES;
                         break;
                     case eReeval:
-                        pool=[[NSAutoreleasePool alloc] init];
-                        goto reeval;
+                        //pool=[[NSAutoreleasePool alloc] init];
+                        //goto reeval;
+						break;
                     default: ;//this ought to shut gcc up
                 }
             }
         } while (myShouldLoop);
-finish:
-        NS_HANDLER
-            if (! [[localException name] isEqualToString:CancelShowException]) [localException raise];
-        NS_ENDHANDLER
+	}
+	@catch (NSException *exception) {
+		// TODO: handle an exception
+		//if (! [[localException name] isEqualToString:CancelShowException]) [localException raise];
+	}
+	
         //NSLog(@"%f", [[NSDate date] timeIntervalSinceDate:date]); //used for timing shows
         [pool release];
         pool=nil;

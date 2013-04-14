@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "QuicktimeShow.h"
+//#import "QuicktimeShow.h"
 #import <QuickTime/QuickTime.h>
 
 //FullScreenQuickTimeShow

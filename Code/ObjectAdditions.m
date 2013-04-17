@@ -34,7 +34,7 @@ typedef int(*intFuncTwo)(id, SEL, id, id);
 + (BOOL)inheritsFromClass:(Class)c {
     do {
         if (self == c) return YES;
-    } while (self=[self superclass]);
+    } while ((self=[self superclass]));
     return NO;
 }
 

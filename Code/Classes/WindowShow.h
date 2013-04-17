@@ -10,7 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SlideShow.h"
 
-@interface WindowShow : SlideShow {
+@interface WindowShow : SlideShow<NSWindowDelegate> {
     IBOutlet NSWindow* myWindow;
     IBOutlet BackgroundImageView* myImageView;
 }

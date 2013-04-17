@@ -26,8 +26,8 @@ NSString* displayers[]={
     @"Move to trash",
     @"Move to folder...",
     @"Copy to folder...",
-    @"Rotate 90¡ CCW",
-    @"Rotate 90¡ CW",
+    @"Rotate 90¼ CCW",
+    @"Rotate 90¼ CW",
     @"Flip horizontal",
     @"Flip vertical",
     @"Toggle comment window"
@@ -230,13 +230,14 @@ static NSString* displayStringForKey(unichar key) {
         if (newSel == @selector(kbMoveToFolder:) || newSel == @selector(kbCopyToFolder:)) {
             NSOpenPanel* panel=[NSOpenPanel openPanel];
             int result;
-            NSString* path;
+            
             [panel setCanChooseFiles:NO];
             [panel setCanChooseDirectories:YES];
             [panel setResolvesAliases:YES];
-            result=[panel runModalForDirectory:nil file:nil types:nil];
+            result=[panel runModal];
             if (result==NSCancelButton) return;
-            path=[[panel filenames] objectAtIndex:0];
+			NSURL *pathUrl = [[panel URLs] objectAtIndex:0];
+            NSString *path=[pathUrl absoluteString];
             kb->param=[path retain];
         }
         kb->action=newSel;

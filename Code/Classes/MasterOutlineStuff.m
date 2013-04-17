@@ -139,13 +139,18 @@
 }
 
 - (void)deleteRowsFromOutline:(NSOutlineView*)view {
-    NSEnumerator* enumer=[view selectedRowEnumerator];
-    NSNumber* row;
+    NSIndexSet *indexes=[view selectedRowIndexes];
     [self saveUndoableState];
-    while ((row=[enumer nextObject])) {
-        id item=[view itemAtRow:[row intValue]];
+
+	NSUInteger row = [indexes firstIndex];
+	while (row != NSNotFound) {
+        id item=[view itemAtRow:row];
         [self removeHierarchy:item];
-    }
+
+		//increment
+		row = [indexes indexGreaterThanIndex: row];
+	}
+    
     [view deselectAll:self];
     [view reloadData];
 }

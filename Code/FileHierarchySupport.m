@@ -31,17 +31,21 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
     path=[path resolveAliasesIsDir:&isDir];
     if (path != nil) {
         if (isDir) {
-            NSArray* dirContents=[filer directoryContentsAtPath:path];
+			
+			NSError *error = nil;
+			NSArray* dirContents = [filer contentsOfDirectoryAtPath:path error:&error];
+			
             unsigned i, max=[dirContents count];
             NSMutableArray* hierarchyContents=[NSMutableArray arrayWithCapacity:max];
             result=[NSMutableArray arrayWithCapacity:2];
             [result setFilename:path];
             for (i=0; i<max; i++) {
                 NSString* dirPath=[dirContents objectAtIndex:i];
-                id innerHierarchy;
                 dirPath=[path stringByAppendingPathComponent:dirPath];
-                innerHierarchy=[self hierarchyWithPath:dirPath];
-                if (innerHierarchy) [hierarchyContents addObject:innerHierarchy];
+                id innerHierarchy=[self hierarchyWithPath:dirPath];
+                if (innerHierarchy) {
+					[hierarchyContents addObject:innerHierarchy];
+				}
             }
             [result setContents:hierarchyContents];
         }

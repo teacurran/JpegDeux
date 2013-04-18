@@ -237,7 +237,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
             [defaults setObject:[[[filesToOpen objectAtIndex:0] absoluteString] lastPathComponent] forKey:@"DefaultImageFile"];
             [defaults synchronize];
         }
-        [self processAndAddURLs:filesToOpen];
+        [self processAndAddPaths:filesToOpen];
         //[myFilesTable collapseItem:nil collapseChildren:YES];
     }
 }
@@ -246,7 +246,17 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     unsigned i, max=[urls count];
     [self saveUndoableState];
     for (i=0; i<max; i++) {
-        [myFileHierarchyArray addObject:urls];
+        [myFileHierarchyArray addObject:[urls objectAtIndex:i]];
+    }
+    [myFilesTable reloadData];
+}
+
+- (void)processAndAddPaths:(NSArray*)urls {
+    //[myChosenFiles mergeWithArray:[self prepareFilesAndDirectories:files]];
+    [self saveUndoableState];
+	for (NSURL *url in urls) {
+        id fileHierarchy=[FileHierarchy hierarchyWithPath:[url path]];
+        [myFileHierarchyArray addObject:fileHierarchy];
     }
     [myFilesTable reloadData];
 }

@@ -65,4 +65,7 @@
 //SlideShow just ignores, QuicktimeShow makes use
 - (void)setQuality:(int)quality;
 
+- (void)preload;
+
+
 @end

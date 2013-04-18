@@ -19,7 +19,7 @@
 #import "FileHierarchySupport.h"
 #import "BackgroundImageView.h"
 #import "MasterOutlineStuff.h"
-#import <Carbon/Carbon.h>
+//#import <Carbon/Carbon.h>
 #import "sorting.h"
 #import "ImageWindowController.h"
 #import "DefaultTransitionChooser.h"
@@ -198,32 +198,46 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 - (IBAction)selectFiles:(id)sender {
     NSUserDefaults* defaults=[NSUserDefaults standardUserDefaults];
     NSString* startingDirectory=[defaults stringForKey:@"DefaultImageDirectory"];
-    NSString* startingFile=[defaults stringForKey:@"DefaultImageFile"];
+   
+	// todo: look into using startingFile with the new beginSheetModalForWindow method
+	//NSString* startingFile=[defaults stringForKey:@"DefaultImageFile"];
     NSOpenPanel* panel=[NSOpenPanel openPanel];
     [self showWindow];
     if (! startingDirectory) startingDirectory=NSHomeDirectory();
     [panel setAllowsMultipleSelection:YES];
     [panel setCanChooseDirectories:YES];
     [panel setCanChooseFiles:YES];
-    [panel beginSheetForDirectory:startingDirectory
-                             file:startingFile
-                            types:[NSImage imageFileTypes]
-                   modalForWindow:[myFilesTable window]
-                    modalDelegate:self
-                   didEndSelector:@selector(openPanelDidEnd: returnCode: contextInfo:)
-                      contextInfo:nil];
+	
+	[panel setDirectoryURL:[[NSURL alloc] initWithString:startingDirectory]];
+	[panel setAllowedFileTypes:[NSImage imageFileTypes]];
+	[panel beginSheetModalForWindow:[myFilesTable window] completionHandler:^(NSInteger returnCode)
+	{
+		[self openPanelDidEnd:panel returnCode:returnCode contextInfo:NULL];
+	}];
+	
+	/* Use -beginSheetModalForWindow:completionHandler: instead.
+	 Set the -directoryURL property instead of passing in a 'path'.
+	 Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
+	 */
+	//    [panel beginSheetForDirectory:startingDirectory
+	//                             file:startingFile
+	//                            types:[NSImage imageFileTypes]
+	//                   modalForWindow:[myFilesTable window]
+	//                    modalDelegate:self
+	//                   didEndSelector:@selector(openPanelDidEnd: returnCode: contextInfo:)
+	//                      contextInfo:nil];
 }
 
 - (void)openPanelDidEnd:(NSOpenPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo {
     NSUserDefaults* defaults=[NSUserDefaults standardUserDefaults];
     if (returnCode == NSOKButton) {
-        NSArray* filesToOpen = [panel filenames];
+        NSArray* filesToOpen = [panel URLs];
         if ([filesToOpen count] > 0) {
-            [defaults setObject:[[filesToOpen objectAtIndex:0] stringByDeletingLastPathComponent] forKey:@"DefaultImageDirectory"];
-            [defaults setObject:[[filesToOpen objectAtIndex:0] lastPathComponent] forKey:@"DefaultImageFile"];
+            [defaults setObject:[[[filesToOpen objectAtIndex:0] absoluteString] stringByDeletingLastPathComponent] forKey:@"DefaultImageDirectory"];
+            [defaults setObject:[[[filesToOpen objectAtIndex:0] absoluteString] lastPathComponent] forKey:@"DefaultImageFile"];
             [defaults synchronize];
         }
-        [self processAndAddFiles:filesToOpen];
+        [self processAndAddURLs:filesToOpen];
         //[myFilesTable collapseItem:nil collapseChildren:YES];
     }
 }
@@ -232,7 +246,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     unsigned i, max=[urls count];
     [self saveUndoableState];
     for (i=0; i<max; i++) {
-        [myFileHierarchyArray addObject:[urls objectAtIndex:i]];
+        [myFileHierarchyArray addObject:urls];
     }
     [myFilesTable reloadData];
 }
@@ -312,14 +326,19 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (void)openSlideshow:(NSString*)path {
-    NSDictionary* dict=[NSDictionary dictionaryWithContentsOfFile:path];
+	NSURL *url = [[NSURL alloc] initWithString:path];
+	[self openSlideshowWithUrl:url];
+}
+
+- (void)openSlideshowWithUrl:(NSURL*)url {
+    NSDictionary* dict=[NSDictionary dictionaryWithContentsOfURL:url];
     if (! dict) NSBeep();
     else {
         [self loadFromDictionary:dict];
         [myCurrentSavingPath release];
-        myCurrentSavingPath=[path copy];
+        myCurrentSavingPath=[[url absoluteString] copy];
         [[NSDocumentController sharedDocumentController]
-            noteNewRecentDocumentURL:[NSURL fileURLWithPath:path]];
+		 noteNewRecentDocumentURL:[NSURL fileURLWithPath:path]];
     }
 }
 
@@ -331,10 +350,12 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [panel setCanChooseDirectories:NO];
     [panel setResolvesAliases:YES];
     [panel setAllowsMultipleSelection:NO];
-    result=[panel runModalForDirectory:[prefs objectForKey:@"DefaultSlideshowDirectory"]
-                                  file:nil
-                                 types:nil];
-    if (result==NSOKButton) [self openSlideshow:[[panel filenames] objectAtIndex:0]];
+	
+	NSURL *directory = [[NSURL alloc] initWithString:[prefs objectForKey:@"DefaultSlideshowDirectory"]];
+	[panel setDirectoryURL: directory];
+    result=[panel runModal];
+			
+    if (result==NSOKButton) [self openSlideshowWithUrl:[[panel URLs] objectAtIndex:0]];
 }
 
 - (IBAction)saveDocument:(id)sender {
@@ -353,9 +374,13 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
                     newCreator, NSFileHFSCreatorCode,
                     newCreator, NSFileHFSTypeCode,
                     nil];
-                if (! [filer changeFileAttributes:attribs atPath:myCurrentSavingPath])
+				
+				NSError *error = nil;
+				[filer setAttributes:attribs ofItemAtPath:myCurrentSavingPath error:&error];
+				if (error) {
                     [NSException raise:@"SaveException"
                                 format:@"JPEGDeux couldn't change the type/creator code of the saved file"];
+				}
             }
             [[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:[NSURL fileURLWithPath:myCurrentSavingPath]];
         }
@@ -370,7 +395,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     result=[panel runModal];
     if (result==NSFileHandlingPanelOKButton) {
         [myCurrentSavingPath release];
-        myCurrentSavingPath=[[panel filename] copy];
+        myCurrentSavingPath=[[[panel URL] absoluteString] copy];
         [self saveDocument:sender];
     }
 }
@@ -397,7 +422,9 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [myCurrentShow beginShow:myChosenFiles];
     [myCurrentShow setQuality:myQuality];
     [myCurrentShow setBackgroundColor:myBackgroundColor];
-    if (myShouldPrecache) [(id)myCurrentShow preload];
+    if (myShouldPrecache) {
+		[(id)myCurrentShow preload];
+	}
     NS_HANDLER
         [myCurrentShow release];
         myCurrentShow=nil;
@@ -515,7 +542,14 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (BOOL)application:(NSApplication*)theApplication openFile:(NSString*)filename {
     NSFileManager* filer=[NSFileManager defaultManager];
-    NSDictionary* attribs=[filer fileAttributesAtPath:filename traverseLink:YES];
+
+
+	// TODO: this method has been replaced, figure out if we need to do something special to handle
+	// the traverseLink attribute of the old method
+	// NSDictionary* attribs=[filer fileAttributesAtPath:filename traverseLink:YES];
+	NSError *error = nil;
+	NSDictionary* attribs = [filer attributesOfItemAtPath:filename error:&error];
+	
     if ([[attribs objectForKey:NSFileHFSTypeCode] unsignedIntValue] == gSSTypeCode ||
         [[filename pathExtension] caseInsensitiveCompare:@"plist"] == NSOrderedSame ||
         isPropertyList(filename)) {
@@ -539,24 +573,29 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (void)recursiveSortSelected:(int (*)(id, id, void*))func onArray:(NSMutableArray*)array {
-    NSEnumerator* enumer=[myFilesTable selectedRowEnumerator];
+	
+	NSIndexSet *indexes=[myFilesTable selectedRowIndexes];
     unsigned i, max;
-    NSNumber* indexObject;
     BOOL needToDig=NO;
     NSMutableDictionary* context=[NSMutableDictionary dictionary];
     NSMutableArray* newContents=[NSMutableArray array];
     NSMutableArray* modifiedIndices=[NSMutableArray array];
-    while ((indexObject=[enumer nextObject])) {
-        int index=[indexObject intValue];
-        id object=[myFilesTable itemAtRow:index];
+
+	NSUInteger row = [indexes firstIndex];
+	while (row != NSNotFound) {
+        id object=[myFilesTable itemAtRow:row];
         unsigned arrayIndex;
         arrayIndex=[array indexOfObjectIdenticalTo:object];
         if (arrayIndex != NSNotFound) {
             [modifiedIndices addObject:[NSNumber numberWithUnsignedInt:arrayIndex]];
             [newContents addObject:object];
-        }
-        else needToDig=YES;
-    }
+        } else {
+			needToDig=YES;
+		}
+
+		//increment
+		row = [indexes indexGreaterThanIndex: row];
+	}
     [newContents sortUsingFunction:func context:context];
     max=[modifiedIndices count];
     for (i=0; i < max; i++) {
@@ -690,22 +729,27 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (void)recursiveReverseSelected:(NSMutableArray*)array {
-    NSEnumerator* enumer=[myFilesTable selectedRowEnumerator];
+	NSIndexSet *indexes=[myFilesTable selectedRowIndexes];
     unsigned i, max;
-    NSNumber* indexObject;
     BOOL needToDig=NO;
     NSMutableArray* newContents=[NSMutableArray array];
     NSMutableArray* modifiedIndices=[NSMutableArray array];
-    while ((indexObject=[enumer nextObject])) {
-        int index=[indexObject intValue];
-        id object=[myFilesTable itemAtRow:index];
+
+	NSUInteger row = [indexes firstIndex];
+	while (row != NSNotFound) {
+        id object=[myFilesTable itemAtRow:row];
+
         unsigned arrayIndex;
         arrayIndex=[array indexOfObjectIdenticalTo:object];
         if (arrayIndex != NSNotFound) {
             [modifiedIndices addObject:[NSNumber numberWithUnsignedInt:arrayIndex]];
             [newContents insertObject:object atIndex:0];
-        }
-        else needToDig=YES;
+        } else {
+			needToDig=YES;
+		}
+		
+		//increment
+		row = [indexes indexGreaterThanIndex: row];
     }
     max=[modifiedIndices count];
     for (i=0; i < max; i++) {

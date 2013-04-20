@@ -12,6 +12,8 @@
 @interface ScreenShowTransitionChooser : DefaultTransitionChooser {
     IBOutlet NSPopUpButton* myTransitionType;
     IBOutlet NSSlider* myTransitionSpeed;
+    IBOutlet NSTextField* myTransitionDuration;
+
 }
 
 

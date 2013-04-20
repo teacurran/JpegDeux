@@ -20,8 +20,8 @@
             nil];
 		
 		imageView = [[NSImageView alloc] initWithFrame:frame];
-		
 		[self addSubview:imageView];
+		
     }
     return self;
 }
@@ -88,6 +88,7 @@
         NSSize size=[myImageName sizeWithAttributes:myNameAttributes];
         NSPoint drawPoint=NSMakePoint(NSMaxX(rect)-size.width, 0);
         [myImageName drawAtPoint:drawPoint withAttributes:myNameAttributes];
+		
     }
 }
 

@@ -33,8 +33,12 @@
         }
         myTransition=selector;
         steps=[[params objectForKey:@"NumSteps"] floatValue];
-        if (steps < 1.0) steps=1.0;
+        if (steps < 1.0) {
+			steps=1.0;
+		}
         myIncrement=1.0/steps;
+		
+		transitionSpeed = [[params objectForKey:@"Duration"] doubleValue];
     }
     return self;
 }
@@ -155,11 +159,9 @@
 	NSViewAnimation *animation = [[NSViewAnimation alloc] initWithViewAnimations:
 								  [NSArray arrayWithObjects: fadeOut, nil]];
 	[animation setAnimationBlockingMode: NSAnimationBlocking];
-	[animation setDuration: 1];
+	[animation setDuration: transitionSpeed];
 	[animation setAnimationCurve: NSAnimationEaseInOut];
 	[animation startAnimation];
-
-	// TODO: figure out how to factor in myIncrement, maybe change myIncrement to duration
 
     [myOtherCoveringWindow makeKeyAndOrderFront:self];
     [myCoveringWindow setAlphaValue:1];

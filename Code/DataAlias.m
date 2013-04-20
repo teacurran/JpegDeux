@@ -18,10 +18,22 @@
     NSData* result;
     AliasHandle handle;
     FSSpec fileSpec;
-    if (! path) return nil;
-    if (! [path makeFSSpec:&fileSpec]) return nil;
-    if (NewAlias(NULL, &fileSpec, &handle) != noErr) return nil;
-    if (! handle) return nil;
+    if (! path) {
+		return nil;
+	}
+	
+    if (! [path makeFSSpec:&fileSpec]) {
+		return nil;
+	}
+
+    if (NewAlias(NULL, &fileSpec, &handle) != noErr) {
+		return nil;
+	}
+	
+    if (! handle) {
+		return nil;
+	}
+	
     //(*handle)->userType=MAGIC_IDENTIFIER;
 	SetAliasUserType(handle, MAGIC_IDENTIFIER);
     result=[NSData dataWithBytes:*handle length:GetAliasSize(handle)];

@@ -26,8 +26,8 @@ NSString* displayers[]={
     @"Move to trash",
     @"Move to folder...",
     @"Copy to folder...",
-    @"Rotate 90¼ CCW",
-    @"Rotate 90¼ CW",
+    @"Rotate 90\xC2\xB0",
+    @"Rotate 90\xC2\xB0 CW",
     @"Flip horizontal",
     @"Flip vertical",
     @"Toggle comment window"

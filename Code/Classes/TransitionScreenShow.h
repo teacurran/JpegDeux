@@ -16,6 +16,7 @@
     BackgroundImageView* myOtherImageView;
     SEL myTransition;
     float myIncrement;
+	NSTimeInterval transitionSpeed;
 }
 
 //transitions

@@ -19,7 +19,6 @@
 #import "FileHierarchySupport.h"
 #import "BackgroundImageView.h"
 #import "MasterOutlineStuff.h"
-//#import <Carbon/Carbon.h>
 #import "sorting.h"
 #import "ImageWindowController.h"
 #import "DefaultTransitionChooser.h"
@@ -115,6 +114,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [myShouldLoopButton setIntValue:myShouldLoop];
     [myShouldRandomizeButton setIntValue:myShouldRandomize];
     [myTimeIntervalField setFloatValue:myTimeInterval];
+	[myBackgroundColorWell setColor:myBackgroundColor];
     [myShouldAutoAdvanceButton setIntValue:myShouldAutoAdvance];
     [myScalingMatrix selectCellWithTag:myScaling];
     [myShouldOnlyScaleDownButton setIntValue:myShouldOnlyScaleDown];
@@ -420,10 +420,13 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
         return;
     }
     myTimeInterval=[myTimeIntervalField doubleValue]; //the IBAction seems unreliable
+	myBackgroundColor = [myBackgroundColorWell color];
+
     [self savePreferenceSettings];
     [myCurrentShow release];
     myCurrentShow=[[myDisplayModeClass alloc] initWithParams:[myTransitionChooser valueDictionary]];
     NS_DURING
+	
     if (myShouldOnlyScaleDown && myScaling==NSScaleProportionally) [myCurrentShow setImageScaling:ScaleDownProportionally];
     else if (myShouldOnlyScaleDown && myScaling==NSScaleToFit) [myCurrentShow setImageScaling:ScaleDownToFit];
     else [myCurrentShow setImageScaling:myScaling];

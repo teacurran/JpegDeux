@@ -105,9 +105,19 @@
     return myBackgroundColor;
 }
 
+- (void)drawRect:(NSRect)rect {
+	[super drawRect:rect];
+	
+	if (myImageName) {
+		[self drawImageName:rect];
+	}
+}
+
 - (void)setImage:(NSImage*)image {
-    [myImage release];
-    myImage=[image retain];
+
+	[myImage release];
+
+	myImage=[image retain];
 	
 	[imageView setImage:myImage];
 	

@@ -144,13 +144,23 @@
 }
 
 - (void)fade:(NSImage*)image {
-    float i;
 
     [myOtherImageView setRotation:myRotation];
-    //myRotation=0;
-    for (i=1; i>0; i-=myIncrement) {
-        [myCoveringWindow setAlphaValue:i];
-    }
+
+
+	NSDictionary *fadeOut = [NSDictionary dictionaryWithObjectsAndKeys:
+							myCoveringWindow, NSViewAnimationTargetKey,
+							NSViewAnimationFadeOutEffect, NSViewAnimationEffectKey,
+							nil];
+	NSViewAnimation *animation = [[NSViewAnimation alloc] initWithViewAnimations:
+								  [NSArray arrayWithObjects: fadeOut, nil]];
+	[animation setAnimationBlockingMode: NSAnimationBlocking];
+	[animation setDuration: 1];
+	[animation setAnimationCurve: NSAnimationEaseInOut];
+	[animation startAnimation];
+
+	// TODO: figure out how to factor in myIncrement, maybe change myIncrement to duration
+
     [myOtherCoveringWindow makeKeyAndOrderFront:self];
     [myCoveringWindow setAlphaValue:1];
     swap(myCoveringWindow, myOtherCoveringWindow);
@@ -160,6 +170,13 @@
 - (void)setImage:(NSImage*)image {
     [self performSelector:myTransition withObject:image];
 }
+
+- (void)setBackgroundColor:(NSColor*)color {
+	[super setBackgroundColor:color];
+    [myOtherCoveringWindow setBackgroundColor:color];
+    [myOtherImageView setColor:color];
+}
+
 
 #undef swap
 

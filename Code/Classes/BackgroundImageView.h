@@ -18,6 +18,7 @@
     float myRotation;
     BOOL myHFlipped;
     BOOL myVFlipped;
+	NSImageView *imageView;
 }
 
 - (void)setImageName:(NSString*)name;

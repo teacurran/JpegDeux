@@ -550,6 +550,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     return eNothing;
 }
 
+
 - (BOOL)application:(NSApplication*)theApplication openFile:(NSString*)filename {
     NSFileManager* filer=[NSFileManager defaultManager];
 

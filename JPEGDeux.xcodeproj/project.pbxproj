@@ -29,7 +29,6 @@
 		93A31A47171A3B4400528ABE /* DataAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F05AF7038F84FE01FD9FBC /* DataAlias.m */; };
 		93A31A4A171A3CA800528ABE /* MoreFilesX.c in Sources */ = {isa = PBXBuildFile; fileRef = 93A31A48171A3C9B00528ABE /* MoreFilesX.c */; };
 		93A31A4F171A3E1F00528ABE /* Scaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A31A4E171A3E1F00528ABE /* Scaling.m */; };
-		93A31A55171A408E00528ABE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A52171A408E00528ABE /* MainMenu.xib */; };
 		93A31A64171A40A400528ABE /* DefaultTransitionView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A56171A40A400528ABE /* DefaultTransitionView.nib */; };
 		93A31A65171A40A400528ABE /* ImageWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A58171A40A400528ABE /* ImageWindow.nib */; };
 		93A31A66171A40A400528ABE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A5A171A40A400528ABE /* InfoPlist.strings */; };
@@ -79,7 +78,6 @@
 		93A31A48171A3C9B00528ABE /* MoreFilesX.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = MoreFilesX.c; sourceTree = "<group>"; };
 		93A31A49171A3C9B00528ABE /* MoreFilesX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreFilesX.h; sourceTree = "<group>"; };
 		93A31A4E171A3E1F00528ABE /* Scaling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scaling.m; sourceTree = "<group>"; };
-		93A31A53171A408E00528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = JPEGDeux/en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		93A31A57171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/DefaultTransitionView.nib; sourceTree = "<group>"; };
 		93A31A59171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/ImageWindow.nib; sourceTree = "<group>"; };
 		93A31A5B171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JPEGDeux/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 				93A31A5E171A40A400528ABE /* MainMenu.nib */,
 				93A31A60171A40A400528ABE /* Preload.nib */,
 				93A31A62171A40A400528ABE /* ScreenShowTransitionView.nib */,
-				93A31A52171A408E00528ABE /* MainMenu.xib */,
 				F56A1BE40200B2A801FDC0B7 /* trash.aiff */,
 				F5ECB42E014737C601000001 /* Credits.rtf */,
 				F5B329870200F21501FDC0B7 /* license.txt */,
@@ -686,7 +683,6 @@
 				93E45F2D14638C2A00C5C55B /* JPEGDeuxDocument.icns in Resources */,
 				93965903171A1EA100286CB9 /* InfoPlist.strings in Resources */,
 				93965905171A1EA100286CB9 /* JPEGDeux-Info.plist in Resources */,
-				93A31A55171A408E00528ABE /* MainMenu.xib in Resources */,
 				93A31A64171A40A400528ABE /* DefaultTransitionView.nib in Resources */,
 				93A31A65171A40A400528ABE /* ImageWindow.nib in Resources */,
 				93A31A66171A40A400528ABE /* InfoPlist.strings in Resources */,
@@ -750,14 +746,6 @@
 				939658FA171A1EA100286CB9 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		93A31A52171A408E00528ABE /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				93A31A53171A408E00528ABE /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		93A31A56171A40A400528ABE /* DefaultTransitionView.nib */ = {

@@ -114,16 +114,20 @@
             NSString* path=[myChosenFiles objectAtIndex:myCurrentImageIndex];
             if ([path hasPrefix:@"http://"]) {
                 NSURL* url=[NSURL URLWithString:path];
-                if (url) myNextImage=[[NSImage alloc] initWithContentsOfURL:url];
-                /*if (url) {
-                    NSURLHandle* handle=[[[[NSURLHandle URLHandleClassForURL:url] alloc] initWithURL:url cached:YES] autorelease];
-                    NSData* data=[handle resourceData];
-                    myNextImage=[[NSImage alloc] initWithData:data];
-                }*/
-                else myNextImage=nil;
+                if (url) {
+					myNextImage=[[NSImage alloc] initWithContentsOfURL:url];
+					/*if (url) {
+						NSURLHandle* handle=[[[[NSURLHandle URLHandleClassForURL:url] alloc] initWithURL:url cached:YES] autorelease];
+						NSData* data=[handle resourceData];
+						myNextImage=[[NSImage alloc] initWithData:data];
+					}*/
+				} else {
+					myNextImage=nil;
+				}
                 //NSLog(@"\nPath:\t%@\nURL:\t%@\nImage:\t%@", path, url, myNextImage);
-            }
-            else myNextImage=[[NSImage alloc] initWithContentsOfFile:path];
+            } else {
+				myNextImage=[[NSImage alloc] initWithContentsOfFile:path];
+			}
             if (myNextImage==nil) {
                 [myChosenFiles removeObjectAtIndex:myCurrentImageIndex--];
                 continue;

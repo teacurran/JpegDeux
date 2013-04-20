@@ -27,7 +27,7 @@ typedef enum {
    eReeval //a horrible hack
 } EventAction;
 
-@interface Master : NSObject {
+@interface Master : NSObject<NSApplicationDelegate> {
     id	myDisplayModeClass;
     BOOL myShouldLoop;
     BOOL myShouldRandomize;

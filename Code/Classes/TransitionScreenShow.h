@@ -10,6 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SlideShow.h"
 #import "ScreenShow.h"
+#import <QuartzCore/CAAnimation.h>
 
 @interface TransitionScreenShow : ScreenShow {
     NSWindow* myOtherCoveringWindow;

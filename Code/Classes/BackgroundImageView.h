@@ -19,6 +19,7 @@
     BOOL myHFlipped;
     BOOL myVFlipped;
 	NSImageView *imageView;
+	NSTextField *myImageLabel;
 }
 
 - (void)setImageName:(NSString*)name;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		930E803417247A9C00291667 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E803217247A9C00291667 /* Quartz.framework */; };
+		930E803517247A9C00291667 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E803317247A9C00291667 /* QuartzCore.framework */; };
 		93965903171A1EA100286CB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 939658F9171A1EA100286CB9 /* InfoPlist.strings */; };
 		93965905171A1EA100286CB9 /* JPEGDeux-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 939658FD171A1EA100286CB9 /* JPEGDeux-Info.plist */; };
 		93965906171A1EA100286CB9 /* JPEGDeuxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93965900171A1EA100286CB9 /* JPEGDeuxAppDelegate.m */; };
@@ -67,6 +69,8 @@
 /* Begin PBXFileReference section */
 		0A052D38085C74ED0037FF42 /* Scaling.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Scaling.m; path = Code/Scaling.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		930E803217247A9C00291667 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Quartz.framework; sourceTree = DEVELOPER_DIR; };
+		930E803317247A9C00291667 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		939658FA171A1EA100286CB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		939658FD171A1EA100286CB9 /* JPEGDeux-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JPEGDeux-Info.plist"; sourceTree = "<group>"; };
 		939658FE171A1EA100286CB9 /* JPEGDeux-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JPEGDeux-Prefix.pch"; sourceTree = "<group>"; };
@@ -278,6 +282,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				930E803417247A9C00291667 /* Quartz.framework in Frameworks */,
+				930E803517247A9C00291667 /* QuartzCore.framework in Frameworks */,
 				9396590B171A356F00286CB9 /* Cocoa.framework in Frameworks */,
 				93965909171A234400286CB9 /* CoreGraphics.framework in Frameworks */,
 				93E45F6414638D8600C5C55B /* Carbon.framework in Frameworks */,
@@ -302,6 +308,8 @@
 		29B97314FDCFA39411CA2CEA /* JPEGShow */ = {
 			isa = PBXGroup;
 			children = (
+				930E803217247A9C00291667 /* Quartz.framework */,
+				930E803317247A9C00291667 /* QuartzCore.framework */,
 				9396590A171A356F00286CB9 /* Cocoa.framework */,
 				93965908171A234400286CB9 /* CoreGraphics.framework */,
 				939658F6171A1EA100286CB9 /* JPEGDeux */,

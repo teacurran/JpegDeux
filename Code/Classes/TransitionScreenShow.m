@@ -8,6 +8,7 @@
 #import "TransitionScreenShow.h"
 #import "BackgroundImageView.h"
 #import <Carbon/Carbon.h>
+#import <QuartzCore/QuartzCore.h>
 
 @implementation TransitionScreenShow
 
@@ -132,19 +133,28 @@
     const NSRect rect=[myOtherCoveringWindow frame];
     const float height=rect.size.height;
     const NSPoint point=rect.origin;
-    float i;
+
     [myOtherImageView setRotation:myRotation];
     [myOtherCoveringWindow setFrameOrigin:NSMakePoint(point.x, point.y-height)];
     [myOtherCoveringWindow makeKeyAndOrderFront:self];
-    for (i=1; i>0; i-=myIncrement) {
-        NSPoint newPoint;
-        newPoint.y=point.y-i*height;
-        newPoint.x=point.x;
-        [myOtherCoveringWindow setFrameOrigin:newPoint];
-    }
-    [myOtherCoveringWindow setFrameOrigin:point];
-    swap(myCoveringWindow, myOtherCoveringWindow);
-    swap(myImageView, myOtherImageView);
+
+	NSRect newViewFrame = myOtherCoveringWindow.frame;
+	newViewFrame.origin.y = 0;
+	
+	CABasicAnimation *theAnimation;
+	theAnimation=[CABasicAnimation animationWithKeyPath:@"frame"];
+	[theAnimation setFromValue:[NSValue valueWithRect:myOtherCoveringWindow.frame]];
+	[theAnimation setToValue:[NSValue valueWithRect:newViewFrame]];
+	theAnimation.delegate = self;
+	theAnimation.removedOnCompletion = YES;
+	theAnimation.duration=transitionSpeed;
+	[myOtherCoveringWindow setAnimations:[NSDictionary dictionaryWithObject:theAnimation forKey:@"frame"]];
+	[[myOtherCoveringWindow animator] setFrame:newViewFrame display:YES];
+
+	[theAnimation release];
+	
+
+	
 }
 
 - (void)fade:(NSImage*)image {
@@ -162,6 +172,7 @@
 	[animation setDuration: transitionSpeed];
 	[animation setAnimationCurve: NSAnimationEaseInOut];
 	[animation startAnimation];
+	[animation release];
 
     [myOtherCoveringWindow makeKeyAndOrderFront:self];
     [myCoveringWindow setAlphaValue:1];
@@ -177,6 +188,13 @@
 	[super setBackgroundColor:color];
     [myOtherCoveringWindow setBackgroundColor:color];
     [myOtherImageView setColor:color];
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
+	
+	swap(myCoveringWindow, myOtherCoveringWindow);
+    swap(myImageView, myOtherImageView);
+	
 }
 
 

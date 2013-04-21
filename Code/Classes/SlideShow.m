@@ -94,8 +94,11 @@
     if (myNextImage==nil) {
         return NO;
     }
-    if (myFileNameDisplay==path) [self setImageName:[myChosenFiles objectAtIndex:myCurrentImageIndex]];
-    else if (myFileNameDisplay==name) [self setImageName:[[myChosenFiles objectAtIndex:myCurrentImageIndex] lastPathComponent]];
+    if (myFileNameDisplay==path) {
+		[self setImageName:[myChosenFiles objectAtIndex:myCurrentImageIndex]];
+	} else if (myFileNameDisplay==name) {
+		[self setImageName:[[myChosenFiles objectAtIndex:myCurrentImageIndex] lastPathComponent]];
+	}
     [self setImage:myNextImage];
     if (myCommentStyle==windowComment) [self updateWindowComments];
     *timeOfDisplay=CFAbsoluteTimeGetCurrent();

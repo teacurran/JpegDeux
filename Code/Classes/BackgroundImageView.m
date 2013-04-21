@@ -30,6 +30,7 @@
     [myBackgroundColor release];
     [myImageName release];
     [myNameAttributes release];
+	[myImageLabel release];
     [super dealloc];
 }
 
@@ -48,6 +49,7 @@
 - (void)setImageName:(NSString*)name {
     [myImageName release];
     myImageName=[name copy];
+	
 }
 
 - (NSSize)scaledSizeForSize:(NSSize)size {
@@ -85,10 +87,25 @@
 
 - (void)drawImageName:(NSRect)rect {
     if (myImageName) {
-        NSSize size=[myImageName sizeWithAttributes:myNameAttributes];
-        NSPoint drawPoint=NSMakePoint(NSMaxX(rect)-size.width, 0);
-        [myImageName drawAtPoint:drawPoint withAttributes:myNameAttributes];
+        NSSize size=[myImageName sizeWithAttributes:NULL];
 		
+		NSRect imageLabelRect = NSMakeRect(0, 0, NSMaxX(rect), size.height);
+		
+		if (myImageLabel) {
+			[myImageLabel removeFromSuperview];
+			[myImageLabel release];
+		}
+		
+		myImageLabel = [[NSTextField alloc] initWithFrame:imageLabelRect];
+		[myImageLabel setStringValue:myImageName];
+		[myImageLabel setBezeled:NO];
+		[myImageLabel setDrawsBackground:NO];
+		[myImageLabel setEditable:NO];
+		[myImageLabel setSelectable:NO];
+		[myImageLabel setTextColor:[NSColor whiteColor]];
+		
+		[self addSubview:myImageLabel];
+
     }
 }
 

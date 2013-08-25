@@ -9,6 +9,7 @@
 #import "BackgroundImageView.h"
 #import <Carbon/Carbon.h>
 #import <QuartzCore/QuartzCore.h>
+#import <ApplicationServices/ApplicationServices.h>
 
 @implementation TransitionScreenShow
 

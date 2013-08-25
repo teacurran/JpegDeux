@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		930E803417247A9C00291667 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E803217247A9C00291667 /* Quartz.framework */; };
-		930E803517247A9C00291667 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E803317247A9C00291667 /* QuartzCore.framework */; };
+		930E803517247A9C00291667 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E803317247A9C00291667 /* QuartzCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		93965903171A1EA100286CB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 939658F9171A1EA100286CB9 /* InfoPlist.strings */; };
 		93965905171A1EA100286CB9 /* JPEGDeux-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 939658FD171A1EA100286CB9 /* JPEGDeux-Info.plist */; };
 		93965906171A1EA100286CB9 /* JPEGDeuxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93965900171A1EA100286CB9 /* JPEGDeuxAppDelegate.m */; };
 		93965907171A1EA100286CB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93965901171A1EA100286CB9 /* main.m */; };
-		93965909171A234400286CB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93965908171A234400286CB9 /* CoreGraphics.framework */; };
 		9396590B171A356F00286CB9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9396590A171A356F00286CB9 /* Cocoa.framework */; };
 		9396590D171A36F200286CB9 /* DefaultTransitionChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = F506D21903931DED01FD9FBC /* DefaultTransitionChooser.m */; };
 		9396590F171A36F200286CB9 /* ScreenShowTransitionChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = F551C7D9C5B0390101C88848 /* ScreenShowTransitionChooser.m */; };
@@ -38,6 +37,7 @@
 		93A31A68171A40A400528ABE /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A5E171A40A400528ABE /* MainMenu.nib */; };
 		93A31A69171A40A400528ABE /* Preload.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A60171A40A400528ABE /* Preload.nib */; };
 		93A31A6A171A40A400528ABE /* ScreenShowTransitionView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A62171A40A400528ABE /* ScreenShowTransitionView.nib */; };
+		93DE311B17CA7F3F00F94034 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DE311A17CA7F3F00F94034 /* ApplicationServices.framework */; };
 		93E45F2914638C2A00C5C55B /* trash.aiff in Resources */ = {isa = PBXBuildFile; fileRef = F56A1BE40200B2A801FDC0B7 /* trash.aiff */; };
 		93E45F2A14638C2A00C5C55B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F5ECB42E014737C601000001 /* Credits.rtf */; };
 		93E45F2B14638C2A00C5C55B /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = F5B329870200F21501FDC0B7 /* license.txt */; };
@@ -61,7 +61,6 @@
 		93E45F5B14638CFD00C5C55B /* Procedural.m in Sources */ = {isa = PBXBuildFile; fileRef = F52FF8700202FA8201FDC0B7 /* Procedural.m */; };
 		93E45F6314638D7D00C5C55B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F34E5B0145C0BD01000001 /* CoreFoundation.framework */; };
 		93E45F6414638D8600C5C55B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C4771C014870FD01000001 /* Carbon.framework */; };
-		93E45F6514638D8600C5C55B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F34E5D0145C6EF01000001 /* ApplicationServices.framework */; };
 		93E45F6614638D8D00C5C55B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E45F1014638A3000C5C55B /* AppKit.framework */; };
 		93E45F6814638D8D00C5C55B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E45F1214638A3000C5C55B /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +88,7 @@
 		93A31A5F171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		93A31A61171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/Preload.nib; sourceTree = "<group>"; };
 		93A31A63171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/ScreenShowTransitionView.nib; sourceTree = "<group>"; };
+		93DE311A17CA7F3F00F94034 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/ApplicationServices.framework; sourceTree = DEVELOPER_DIR; };
 		93E45F0C14638A3000C5C55B /* JPEGDeux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPEGDeux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93E45F1014638A3000C5C55B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		93E45F1114638A3000C5C55B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -282,12 +282,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93DE311B17CA7F3F00F94034 /* ApplicationServices.framework in Frameworks */,
 				930E803417247A9C00291667 /* Quartz.framework in Frameworks */,
 				930E803517247A9C00291667 /* QuartzCore.framework in Frameworks */,
 				9396590B171A356F00286CB9 /* Cocoa.framework in Frameworks */,
-				93965909171A234400286CB9 /* CoreGraphics.framework in Frameworks */,
 				93E45F6414638D8600C5C55B /* Carbon.framework in Frameworks */,
-				93E45F6514638D8600C5C55B /* ApplicationServices.framework in Frameworks */,
 				93E45F6314638D7D00C5C55B /* CoreFoundation.framework in Frameworks */,
 				93E45F6614638D8D00C5C55B /* AppKit.framework in Frameworks */,
 				93E45F6814638D8D00C5C55B /* Foundation.framework in Frameworks */,
@@ -308,6 +307,7 @@
 		29B97314FDCFA39411CA2CEA /* JPEGShow */ = {
 			isa = PBXGroup;
 			children = (
+				93DE311A17CA7F3F00F94034 /* ApplicationServices.framework */,
 				930E803217247A9C00291667 /* Quartz.framework */,
 				930E803317247A9C00291667 /* QuartzCore.framework */,
 				9396590A171A356F00286CB9 /* Cocoa.framework */,
@@ -853,16 +853,16 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "JPEGDeux/JPEGDeux-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -878,15 +878,15 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JPEGDeux/JPEGDeux-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "JPEGDeux/JPEGDeux-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
@@ -902,15 +902,15 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JPEGDeux/JPEGDeux-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "JPEGDeux/JPEGDeux-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Default;

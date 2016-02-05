@@ -6,7 +6,6 @@
 
 
 #import "StringAdditions.h"
-#import "MoreFilesX.h"
 
 @implementation NSString (StringAdditions)
 
@@ -31,7 +30,9 @@
         unsigned char pathBuff[512];
         result=FSRefMakePath(&ref, pathBuff, sizeof pathBuff);
         if (result != noErr) return nil;
-        return [NSString stringWithCString:(const char *)pathBuff];
+
+        return [NSString stringWithCString:(const char *)pathBuff encoding:NSASCIIStringEncoding];
+
     }
     return self;
 }
@@ -39,8 +40,11 @@
 - (BOOL)makeFSSpec:(FSSpec*)spec {
     OSErr err;
     FSRef ref;
+    
     err=FSPathMakeRef((UInt8 *)[self UTF8String], &ref, 0);
-    if (! err) err=FSRefMakeFSSpec(&ref, spec);
+    if (! err) {
+     err=FSGetCatalogInfo (&ref, kFSCatInfoNone, NULL, NULL, spec, NULL);
+    }
     return err==noErr;
 }
 

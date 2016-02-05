@@ -28,7 +28,6 @@
 		93A31A45171A3B4400528ABE /* DictionaryConvenience.m in Sources */ = {isa = PBXBuildFile; fileRef = F55B48B002D9A0D201BE4052 /* DictionaryConvenience.m */; };
 		93A31A46171A3B4400528ABE /* MyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F589FE9D02EA993B014E77C5 /* MyWindowController.m */; };
 		93A31A47171A3B4400528ABE /* DataAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F05AF7038F84FE01FD9FBC /* DataAlias.m */; };
-		93A31A4A171A3CA800528ABE /* MoreFilesX.c in Sources */ = {isa = PBXBuildFile; fileRef = 93A31A48171A3C9B00528ABE /* MoreFilesX.c */; };
 		93A31A4F171A3E1F00528ABE /* Scaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A31A4E171A3E1F00528ABE /* Scaling.m */; };
 		93A31A64171A40A400528ABE /* DefaultTransitionView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A56171A40A400528ABE /* DefaultTransitionView.nib */; };
 		93A31A65171A40A400528ABE /* ImageWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A58171A40A400528ABE /* ImageWindow.nib */; };
@@ -78,8 +77,6 @@
 		93965901171A1EA100286CB9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93965908171A234400286CB9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		9396590A171A356F00286CB9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		93A31A48171A3C9B00528ABE /* MoreFilesX.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = MoreFilesX.c; sourceTree = "<group>"; };
-		93A31A49171A3C9B00528ABE /* MoreFilesX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreFilesX.h; sourceTree = "<group>"; };
 		93A31A4E171A3E1F00528ABE /* Scaling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scaling.m; sourceTree = "<group>"; };
 		93A31A57171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/DefaultTransitionView.nib; sourceTree = "<group>"; };
 		93A31A59171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/ImageWindow.nib; sourceTree = "<group>"; };
@@ -603,8 +600,6 @@
 		F5B329510200F14901FDC0B7 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				93A31A48171A3C9B00528ABE /* MoreFilesX.c */,
-				93A31A49171A3C9B00528ABE /* MoreFilesX.h */,
 				F5B329530200F14901FDC0B7 /* Classes */,
 				F5B329550200F14901FDC0B7 /* BackgroundImageView.h */,
 				F5B329560200F14901FDC0B7 /* BackgroundImageView.m */,
@@ -708,7 +703,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A31A4A171A3CA800528ABE /* MoreFilesX.c in Sources */,
 				93A31A3D171A3B4400528ABE /* PreviewImageView.m in Sources */,
 				93A31A3E171A3B4400528ABE /* WindowMovingTextField.m in Sources */,
 				93A31A3F171A3B4400528ABE /* BetterTable.m in Sources */,
@@ -862,7 +856,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -886,7 +880,7 @@
 				INFOPLIST_FILE = "JPEGDeux/JPEGDeux-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
@@ -910,7 +904,7 @@
 				INFOPLIST_FILE = "JPEGDeux/JPEGDeux-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Default;

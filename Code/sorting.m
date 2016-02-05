@@ -60,7 +60,9 @@ static NSDate* loadCreateDate(NSString* path) {
 static id loadValue(NSString* path, NSMutableDictionary* dict, NSString* key) {
     id value;
     NSFileManager* manager=[NSFileManager defaultManager];
-    NSDictionary* attribs=[manager fileAttributesAtPath:path traverseLink:YES];
+    
+    NSDictionary* attribs=[manager attributesOfItemAtPath:path error:nil];
+
     value=[attribs objectForKey:key];
     if (! value) {
         if ([key isEqualToString:@"NSFileModificationDate"]) value=loadModDate(path);

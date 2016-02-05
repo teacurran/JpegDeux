@@ -17,16 +17,19 @@
 + (NSData*)aliasForPath:(NSString*)path {
     NSData* result;
     AliasHandle handle;
-    FSSpec fileSpec;
     if (! path) {
 		return nil;
 	}
 	
-    if (! [path makeFSSpec:&fileSpec]) {
-		return nil;
-	}
+    FSRef fsRef;
+    OSStatus os_status = FSPathMakeRef((const UInt8 *)[path fileSystemRepresentation], &fsRef, NULL);
 
-    if (NewAlias(NULL, &fileSpec, &handle) != noErr) {
+    if (os_status != noErr) {
+        return nil;
+    }
+    
+
+    if (FSNewAlias(NULL, &fsRef, &handle) != noErr) {
 		return nil;
 	}
 	
@@ -44,13 +47,18 @@
 - (NSString*)pathForAlias {
     UInt8 path[512];
     Boolean wasChanged;
-    FSSpec target;
+    FSRef target;
     FSRef ref;
     AliasPtr alias=(AliasPtr)[self bytes]; //dangerous; if the file is moved we update bytes in an NSData
     if (MAGIC_IDENTIFIER != *(OSType*)alias) return nil;
-    if (ResolveAlias(NULL, &alias, &target, &wasChanged) != noErr) return nil;
-    if (FSpMakeFSRef(&target, &ref) != noErr) return nil;
-    if (FSRefMakePath(&ref, path, sizeof path) != noErr) return nil;
+    
+    if (FSResolveAlias(NULL, &alias, &target, &wasChanged) != noErr) {
+        return nil;
+    }
+    
+    if (FSRefMakePath(&ref, path, sizeof path) != noErr) {
+        return nil;
+    }
     return [NSString stringWithUTF8String:(const char *)path];
 }
 

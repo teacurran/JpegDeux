@@ -14,7 +14,7 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
     if (! [hierarchy isFolder]) [array addObject:hierarchy];
     else {
         NSArray* contents = [hierarchy contents];
-        unsigned i, max=[contents count];
+        long i, max=[contents count];
         for (i=0; i<max; i++) {
             flattenHierarchy([contents objectAtIndex:i], array);
         }
@@ -35,7 +35,7 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
 			NSError *error = nil;
 			NSArray* dirContents = [filer contentsOfDirectoryAtPath:path error:&error];
 			
-            unsigned i, max=[dirContents count];
+            long i, max=[dirContents count];
             NSMutableArray* hierarchyContents=[NSMutableArray arrayWithCapacity:max];
             result=[NSMutableArray arrayWithCapacity:2];
             [result setFilename:path];
@@ -59,13 +59,16 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
 
 + (id)folderContentsWithPath:(NSString*)path {
     id result=nil;
-    NSFileManager* filer=[NSFileManager defaultManager];
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
     BOOL isDir;
     path=[path resolveAliasesIsDir:&isDir];
     if (path != nil) {
         if (isDir) {
-            NSArray* dirContents=[filer directoryContentsAtPath:path];
-            unsigned i, max=[dirContents count];
+
+            NSArray<NSString *>* dirContents=[fileManager contentsOfDirectoryAtPath:path error:nil];
+            long i, max=[dirContents count];
             NSMutableArray* hierarchyContents=[NSMutableArray arrayWithCapacity:max];
             result=[NSMutableArray arrayWithCapacity:2];
             [result setFilename:path];
@@ -111,7 +114,7 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
 
 - (id)alias {
     NSArray* oldContents=[self contents];
-    unsigned i, max=[oldContents count];
+    long i, max=[oldContents count];
     NSData* path;
     NSMutableArray* contents=[NSMutableArray arrayWithCapacity:max];
     path=[[self filename] alias];
@@ -123,7 +126,7 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
 
 - (id)unalias {
     NSArray* oldContents=[self contents];
-    unsigned i, max=[oldContents count];
+    long i, max=[oldContents count];
     NSString* path;
     NSMutableArray* contents=[NSMutableArray arrayWithCapacity:max];
     path=[[self objectAtIndex:0] unalias];
@@ -154,7 +157,7 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
 
 - (BOOL)removeHierarchy:(id)item {
     NSMutableArray* contents=[self contents];
-    unsigned i, max=[contents count];
+    long i, max=[contents count];
     for (i=0; i<max; i++) {
         id hierarchy=[contents objectAtIndex:i];
         if ([hierarchy isEqual:item]) {

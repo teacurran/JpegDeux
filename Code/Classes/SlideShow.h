@@ -60,7 +60,7 @@
 - (void)flipVertical;
 
 //subclasses can override
-- (unsigned)estimatedSizeOfCachedImages;
+- (long)estimatedSizeOfCachedImages;
 
 //SlideShow just ignores, QuicktimeShow makes use
 - (void)setQuality:(int)quality;

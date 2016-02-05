@@ -21,7 +21,6 @@ const unsigned long gSSTypeCode = MAKE_CODE('J', 'p', 'g', 'D');
 int main(int argc, char *argv[])
 {
 	//    NSZombieEnabled=YES;
-    srandom(time(NULL));
     //[FixedBitmapImageRep poseAsClass:[NSBitmapImageRep class]];
     //return NSApplicationMain(argc, argv);
 

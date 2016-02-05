@@ -22,7 +22,8 @@
 }
 
 - (void)dealloc {
-    ShowMenuBar();
+    [NSMenu setMenuBarVisible:YES];
+
     [myCoveringWindow orderOut:self];
     [myContext release];
     [myCoveringWindow release];
@@ -42,7 +43,8 @@
     [myImageView setImageScaling:myScaling];
     [myCoveringWindow setContentView:myImageView];
 
-    HideMenuBar();
+    [NSMenu setMenuBarVisible:NO];
+    
     [myCoveringWindow makeKeyAndOrderFront:self];
     myContext=[[NSGraphicsContext graphicsContextWithWindow:myCoveringWindow] retain];
     [super beginShow:files];
@@ -55,7 +57,6 @@
         NSSize oldSize=[myNextImage size];
         NSSize newSize=[myImageView scaledSizeForSize:oldSize];
         if (! NSEqualSizes(newSize, oldSize)) {
-            [myNextImage setScalesWhenResized:YES];
             [myNextImage setSize:newSize];
             [myNextImage lockFocus];
             [myNextImage unlockFocus];

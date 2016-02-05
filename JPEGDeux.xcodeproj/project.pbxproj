@@ -10,7 +10,6 @@
 		930E803417247A9C00291667 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E803217247A9C00291667 /* Quartz.framework */; };
 		930E803517247A9C00291667 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E803317247A9C00291667 /* QuartzCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		93965903171A1EA100286CB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 939658F9171A1EA100286CB9 /* InfoPlist.strings */; };
-		93965905171A1EA100286CB9 /* JPEGDeux-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 939658FD171A1EA100286CB9 /* JPEGDeux-Info.plist */; };
 		93965906171A1EA100286CB9 /* JPEGDeuxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93965900171A1EA100286CB9 /* JPEGDeuxAppDelegate.m */; };
 		93965907171A1EA100286CB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93965901171A1EA100286CB9 /* main.m */; };
 		9396590B171A356F00286CB9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9396590A171A356F00286CB9 /* Cocoa.framework */; };
@@ -656,7 +655,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0720;
 			};
 			buildConfigurationList = 0A052D32085C74660037FF42 /* Build configuration list for PBXProject "JPEGDeux" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -685,7 +684,6 @@
 				93E45F2C14638C2A00C5C55B /* JPEGdeux.icns in Resources */,
 				93E45F2D14638C2A00C5C55B /* JPEGDeuxDocument.icns in Resources */,
 				93965903171A1EA100286CB9 /* InfoPlist.strings in Resources */,
-				93965905171A1EA100286CB9 /* JPEGDeux-Info.plist in Resources */,
 				93A31A64171A40A400528ABE /* DefaultTransitionView.nib in Resources */,
 				93A31A65171A40A400528ABE /* ImageWindow.nib in Resources */,
 				93A31A66171A40A400528ABE /* InfoPlist.strings in Resources */,
@@ -812,21 +810,20 @@
 		0A052D33085C74660037FF42 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Development;
 		};
 		0A052D34085C74660037FF42 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 			};
 			name = Deployment;
 		};
 		0A052D35085C74660037FF42 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 			};
 			name = Default;
 		};
@@ -834,7 +831,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -855,8 +852,9 @@
 				INFOPLIST_FILE = "JPEGDeux/JPEGDeux-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wirelust.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -865,7 +863,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -879,8 +877,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "JPEGDeux/JPEGDeux-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wirelust.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
@@ -889,7 +888,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -903,8 +902,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "JPEGDeux/JPEGDeux-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wirelust.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Default;

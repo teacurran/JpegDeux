@@ -37,8 +37,8 @@ static NSImage* originalImage;
     return NSMakeSize(128, 128);
 }
 
-- (unsigned)estimatedSizeOfCachedImages {
-    unsigned bytesPerPixel=(NSBitsPerPixelFromDepth([[NSScreen mainScreen] depth]) + 7) / 8;
+- (long)estimatedSizeOfCachedImages {
+    long bytesPerPixel=(NSBitsPerPixelFromDepth([[NSScreen mainScreen] depth]) + 7) / 8;
     return bytesPerPixel*128*128*[myChosenFiles count];
 }
 

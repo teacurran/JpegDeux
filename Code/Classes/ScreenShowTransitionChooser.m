@@ -23,7 +23,7 @@
 
 - (NSDictionary*)valueDictionary {
     return [NSDictionary dictionaryWithObjectsAndKeys:
-        [NSNumber numberWithInt:[[myTransitionType selectedItem] tag]], @"Transition",
+        [NSNumber numberWithLong:[[myTransitionType selectedItem] tag]], @"Transition",
         [NSNumber numberWithFloat:[myTransitionSpeed floatValue]], @"NumSteps",
 		[NSNumber numberWithFloat:[myTransitionDuration floatValue]], @"Duration",
         nil];

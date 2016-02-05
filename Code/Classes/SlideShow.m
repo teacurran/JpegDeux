@@ -185,21 +185,14 @@
 }
 
 - (void)reshuffle {
-    unsigned seed;
-    if (myCachedImages) {
-        seed=random();
-        srandom(seed);
-    }
     [myChosenFiles shuffle];
     if (myCachedImages) {
         id old=myCachedImages;
-        srandom(seed);
         myCachedImages=[[myCachedImages shuffledArray] retain];
         [old release];
     }
     if (myCachedImageComments) {
         id old=myCachedImageComments;
-        srandom(seed);
         myCachedImageComments=[[myCachedImageComments shuffledArray] retain];
         [old release];
     }
@@ -233,7 +226,6 @@
 - (void)cacheImageAtProperSize:(NSImage*)image {
     NSSize oldSize=[image size];
     NSSize newSize=[self displaySizeForSize:oldSize];
-    [image setScalesWhenResized:YES];
     [image setSize:newSize];
     [image lockFocus];
     [image unlockFocus];
@@ -243,17 +235,15 @@
     NSApplication* app=[NSApplication sharedApplication];
     NSMutableArray* arr=[NSMutableArray array];
     NSMutableArray* comments;
-    unsigned i, max=[myChosenFiles count];
-    unsigned estimatedBytes;
-    float estimatedMB;
+    long i, max=[myChosenFiles count];
     const NSSize zeroSize={0,0};
     int result;
     NSWindowController* controller;
     NSProgressIndicator* progress=nil;
     NSWindow* progressWindow;
     NSModalSession session;
-    estimatedBytes=[self estimatedSizeOfCachedImages];
-    estimatedMB=estimatedBytes/(float)(1<<20);
+    unsigned estimatedBytes = [self estimatedSizeOfCachedImages];
+    float estimatedMB=estimatedBytes/(float)(1<<20);
     if (estimatedMB >= WARNING_LEVEL) {
         result=NSRunAlertPanel(@"Huge Precacheing!",
                                @"JPEGDeux estimates that precacheing your %u image%s "
@@ -268,7 +258,7 @@
     progressWindow=[controller window];
     {
         NSArray* subviews=[[progressWindow contentView] subviews];
-        unsigned i, max=[subviews count];
+        long i, max=[subviews count];
         for (i=0; i<max; i++) {
             if ([[subviews objectAtIndex:i] isKindOfClass:[NSProgressIndicator class]]) {
                 progress=[subviews objectAtIndex:i];

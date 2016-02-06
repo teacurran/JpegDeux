@@ -237,23 +237,44 @@
     NSMutableArray* comments;
     long i, max=[myChosenFiles count];
     const NSSize zeroSize={0,0};
-    int result;
+
     NSWindowController* controller;
     NSProgressIndicator* progress=nil;
     NSWindow* progressWindow;
     NSModalSession session;
-    unsigned estimatedBytes = [self estimatedSizeOfCachedImages];
+
+    long estimatedBytes = [self estimatedSizeOfCachedImages];
     float estimatedMB=estimatedBytes/(float)(1<<20);
+
     if (estimatedMB >= WARNING_LEVEL) {
-        result=NSRunAlertPanel(@"Huge Precacheing!",
-                               @"JPEGDeux estimates that precacheing your %u image%s "
-                               @"might take up to %.1f megabytes of RAM. "
-                               @"Are you sure you wish to continue?",
-                               @"Cancel", @"Continue", nil,
-                               max, max==1 ? "" : "s", estimatedMB);
-        if (result==NSAlertDefaultReturn)
-            [NSException raise:CancelShowException format:@"Stop precacheing"];
+        NSString *warningMessage = [NSString stringWithFormat: @"JPEGDeux estimates that precacheing your %ld image%s "
+                                    @"might take up to %.1f megabytes of RAM. "
+                                    @"Are you sure you wish to continue?", max, max==1 ? "" : "s", estimatedMB];
+
+        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        [alert setMessageText:@"Huge Precacheing!"];
+        [alert setInformativeText:warningMessage];
+        [alert addButtonWithTitle:@"Continue"];
+        [alert addButtonWithTitle:@"Cancel"];
+
+        NSArray *buttons = [alert buttons];
+        // note: rightmost button is index 0
+        [[buttons objectAtIndex:0] setKeyEquivalent: @"c"];
+        [[buttons objectAtIndex:1] setKeyEquivalent:@"\r"];
+        
+        NSModalResponse result = [alert runModal];
+
+        switch (result) {
+            case NSAlertFirstButtonReturn:
+                break;
+            case NSAlertSecondButtonReturn:
+                [NSException raise:CancelShowException format:@"Stop precacheing"];
+                break;
+            default:
+                break;
+        }
     }
+
     controller=[[MyWindowController alloc] initWithWindowNibName:@"Preload"];
     progressWindow=[controller window];
     {
@@ -326,7 +347,7 @@
 
 }
 
-- (unsigned)estimatedSizeOfCachedImages {
+- (long)estimatedSizeOfCachedImages {
     return 0;
 }
 

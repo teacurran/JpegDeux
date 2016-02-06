@@ -7,7 +7,6 @@
 
 #import "SlideShow.h"
 #import "MutableArrayCategory.h"
-#import "Procedural.h"
 #import "MyWindowController.h"
 #import "CommentFinder.h"
 #import "WindowMovingTextField.h"
@@ -166,8 +165,12 @@
 }
 
 - (void)rewind:(int)count {
-    if (count==-1) myCurrentImageIndex=0;
-    else myCurrentImageIndex=max(myCurrentImageIndex-count, 0);
+    myCurrentImageIndex=0;
+
+    if (count != -1 && myCurrentImageIndex-count < 0) {
+        myCurrentImageIndex = myCurrentImageIndex-count;
+    }
+
     [myNextImage release];
     [self loadNextImage];
 }

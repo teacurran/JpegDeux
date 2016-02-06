@@ -49,8 +49,8 @@
 }
 
 - (NSString*)commonSuffixWithString:(NSString*)s {
-    int a=[self length]-1;
-    int b=[s length]-1;
+    long a=[self length]-1;
+    long b=[s length]-1;
     if (a < 0 || b < 0) return @"";
     while ([self characterAtIndex:a]==[s characterAtIndex:b] && a > 0 && b > 0) {
         a--;

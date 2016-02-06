@@ -104,8 +104,8 @@
     [myImageView setColor:color];
 }
 
-- (unsigned)estimatedSizeOfCachedImages {
-    unsigned bytesPerPixel=(NSBitsPerPixelFromDepth([[NSScreen mainScreen] depth]) + 7) / 8;
+- (long)estimatedSizeOfCachedImages {
+    long bytesPerPixel=(NSBitsPerPixelFromDepth([[NSScreen mainScreen] depth]) + 7) / 8;
     NSSize screenSize=[[NSScreen mainScreen] frame].size;
     return bytesPerPixel*screenSize.width*screenSize.height*[myChosenFiles count];
 }

@@ -42,7 +42,7 @@
         NSFilenamesPboardType, nil]];
     if ([type isEqualToString:NSFilenamesPboardType]) {
         NSArray* files=[board propertyListForType:NSFilenamesPboardType];
-        unsigned i, max;
+        long i, max;
         NSMutableArray* contents;
         if (item && ! [item isFolder]) {
             return NO;

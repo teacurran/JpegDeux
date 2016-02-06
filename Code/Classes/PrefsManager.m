@@ -159,7 +159,7 @@ static NSString* displayStringForKey(unichar key) {
 
 - (BOOL)validatePrefs {
     NSArray* sorted=[myKeyBindings sortedArrayUsingSelector:@selector(comparer:)];
-    unsigned i, max=[sorted count];
+    long i, max=[sorted count];
     unichar lastKey=0;
     for (i=0; i<max; i++) {
         KeyBinding* kb=[sorted objectAtIndex:i];
@@ -167,7 +167,7 @@ static NSString* displayStringForKey(unichar key) {
         lastKey=kb->key;
     }
     if (i < max) {
-        int result=NSRunAlertPanel(@"Duplicate actions",
+        NSInteger result=NSRunAlertPanel(@"Duplicate actions",
                                    @"Multiple actions have been assigned to the same key! "
                                    @"Only one action will take effect.  Are you sure you wish to continue?",
                                    @"Continue", @"Cancel", nil);
@@ -206,7 +206,7 @@ static NSString* displayStringForKey(unichar key) {
     [myWindow makeKeyAndOrderFront:self];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView*)view {
+- (NSUInteger)numberOfRowsInTableView:(NSTableView*)view {
     return [myKeyBindings count];
 }
 
@@ -229,7 +229,7 @@ static NSString* displayStringForKey(unichar key) {
         SEL newSel=NSSelectorFromString(selectors[[value intValue]]);
         if (newSel == @selector(kbMoveToFolder:) || newSel == @selector(kbCopyToFolder:)) {
             NSOpenPanel* panel=[NSOpenPanel openPanel];
-            int result;
+            NSInteger result;
             
             [panel setCanChooseFiles:NO];
             [panel setCanChooseDirectories:YES];
@@ -245,7 +245,7 @@ static NSString* displayStringForKey(unichar key) {
 }
 
 - (void)setKeyBinding:(NSString*)chars {
-    int row=[myTable selectedRow];
+    NSInteger row=[myTable selectedRow];
     KeyBinding* kb=[myKeyBindings objectAtIndex:row];
     kb->key=[chars characterAtIndex:0];
     [myTable reloadData];
@@ -267,7 +267,7 @@ static NSString* displayStringForKey(unichar key) {
 
 - (void)deleteRowsFromView:(NSTableView*)view {
     if ([view numberOfSelectedRows]) {
-        int row=[view selectedRow];
+        NSInteger row=[view selectedRow];
         [myKeyBindings removeObjectAtIndex:row];
         [view reloadData];
     }
@@ -280,7 +280,7 @@ static NSString* displayStringForKey(unichar key) {
 }
 
 - (SEL)selectorForKey:(unichar)key withParam:(id*)param {
-    unsigned i, max=[myKeyBindings count];
+    NSInteger i, max=[myKeyBindings count];
     for (i=0; i<max; i++) {
         KeyBinding* kb=[myKeyBindings objectAtIndex:i];
         if (kb->key == key) {

@@ -69,7 +69,7 @@
         }
         else {
             NSMutableArray* contents;
-            unsigned i, max=[arr count];
+            NSUInteger i, max=[arr count];
             NSArray* oldContents;
             if (item==NULL) contents=myFileHierarchyArray;
             else contents=[item contents];
@@ -103,7 +103,7 @@
     return [item isFolder];
 }
 
-- (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+- (NSUInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
     if (item==nil) return [myFileHierarchyArray count];
     if ([item isFolder]) return [[item contents] count];
     else return 0;
@@ -126,7 +126,7 @@
 }
 
 - (BOOL)removeHierarchy:(id)item {
-    unsigned i, max=[myFileHierarchyArray count];
+    NSInteger i, max=[myFileHierarchyArray count];
     for (i=0; i<max; i++) {
         id hierarchy=[myFileHierarchyArray objectAtIndex:i];
         if ([hierarchy isEqual:item]) {
@@ -160,7 +160,7 @@
         BOOL shouldDisplayImage;
         id hierarchy=nil;
         NSImage* image=nil;
-        int row=[myFilesTable selectedRow];
+        NSInteger row=[myFilesTable selectedRow];
         if (row==-1) shouldDisplayImage=NO;
         else {
             hierarchy=[myFilesTable itemAtRow:row];
@@ -174,7 +174,7 @@
 
 - (void)redoPreviewImageName {
     NSString* name=nil;
-    int row;
+    NSInteger row;
     if (myFileNameDisplay != none) {
         row=[myFilesTable selectedRow];
         if (row != -1) {

@@ -49,7 +49,7 @@ static OSErr invalTrashContents(void);
     NSString* path=[myCurrentShow currentPath];
     if (! [path length]) NSBeep();
     else {
-        int unused;
+        NSInteger unused;
         NSWorkspace* space=[NSWorkspace sharedWorkspace];
         if (! [space performFileOperation:NSWorkspaceRecycleOperation
                                    source:[[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"]
@@ -68,7 +68,7 @@ static OSErr invalTrashContents(void);
     NSString* path=[myCurrentShow currentPath];
     if (! [path length]) NSBeep();
     else {
-        int unused;
+        NSInteger unused;
         NSWorkspace* space=[NSWorkspace sharedWorkspace];
         if (! [space performFileOperation:NSWorkspaceMoveOperation
                                    source:[path stringByDeletingLastPathComponent]
@@ -85,7 +85,7 @@ static OSErr invalTrashContents(void);
     NSString* path=[myCurrentShow currentPath];
     if (! [path length]) NSBeep();
     else {
-        int unused;
+        NSInteger unused;
         NSWorkspace* space=[NSWorkspace sharedWorkspace];
         if (! [space performFileOperation:NSWorkspaceCopyOperation
                                    source:[path stringByDeletingLastPathComponent]

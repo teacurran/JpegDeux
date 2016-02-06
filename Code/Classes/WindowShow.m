@@ -51,7 +51,6 @@
         NSSize oldSize=[myNextImage size];
         NSSize newSize=[myImageView scaledSizeForSize:oldSize];
         if (! NSEqualSizes(newSize, oldSize)) {
-            [myNextImage setScalesWhenResized:YES];
             [myNextImage setSize:newSize];
             [myNextImage lockFocus];
             [myNextImage unlockFocus];
@@ -103,8 +102,8 @@
     [myWindow setBackgroundColor:color];
 }
 
-- (unsigned)estimatedSizeOfCachedImages {
-    unsigned bytesPerPixel=(NSBitsPerPixelFromDepth([[NSScreen mainScreen] depth]) + 7) / 8;
+- (long)estimatedSizeOfCachedImages {
+    long bytesPerPixel=(NSBitsPerPixelFromDepth([[NSScreen mainScreen] depth]) + 7) / 8;
     NSSize windowSize=[myImageView bounds].size;
     return bytesPerPixel*windowSize.width*windowSize.height*[myChosenFiles count];
 }

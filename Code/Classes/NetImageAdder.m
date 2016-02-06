@@ -10,7 +10,6 @@
     NSString* startNumber, * endNumber;
     NSString* first=[myFirstURLField stringValue];
     NSString* last=[myLastURLField stringValue];
-    int i;
     int startValue, endValue;
     BOOL padZeros;
     char padWidth[32];
@@ -21,10 +20,15 @@
     if ([first isEqualToString:last]) return [NSArray arrayWithObject:first];
     prefix=[first commonPrefixWithString:last options:0];
     if (! [prefix length]) return nil;
+
+    long i;
     for (i=[prefix length]; i>0; i--) {
         if (! isdigit([prefix characterAtIndex:i-1])) break;
     }
-    if (i <= 0) return nil;
+    if (i <= 0) {
+        return nil;
+    }
+
     //i should be the index of the first digit character
     prefix=[prefix substringToIndex:i];
     suffix=[first commonSuffixWithString:last];
@@ -43,7 +47,7 @@
     endNumber=[endNumber substringToIndex:[endNumber length]-[suffix length]];
     if (! [startNumber length] || ! [endNumber length]) return nil;
     padZeros=[startNumber characterAtIndex:0]=='0';
-    sprintf(padWidth+1, "%u", [endNumber length]);
+    sprintf(padWidth+1, "%lu", (unsigned long)[endNumber length]);
     padWidth[0]='0';
     formatString=[NSString stringWithFormat:@"%%@%%%sd%%@", padZeros ? padWidth : ""];
     startValue=[startNumber intValue];

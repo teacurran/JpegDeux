@@ -53,7 +53,7 @@ static OSErr invalTrashContents(void);
         NSWorkspace* space=[NSWorkspace sharedWorkspace];
         if (! [space performFileOperation:NSWorkspaceRecycleOperation
                                    source:[[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"]
-                              destination:nil
+                              destination:@""
                                     files:[NSArray arrayWithObject:[path lastPathComponent]]
                                       tag:&unused]) {
             NSBeep();

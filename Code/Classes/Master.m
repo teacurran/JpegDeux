@@ -47,7 +47,7 @@ static NSApplication* application;
 static NSMutableArray* aliasIfNecessary(NSArray* array) {
     NSUserDefaults* prefs=[NSUserDefaults standardUserDefaults];
     if (! [prefs boolForKey:@"DontAliasDictionaries"]) {
-        unsigned i, max=[array count];
+        NSUInteger i, max=[array count];
         NSMutableArray* a=[NSMutableArray arrayWithCapacity:max];
         for (i=0; i<max; i++) {
             [a addObject:[[array objectAtIndex:i] alias]];
@@ -59,7 +59,7 @@ static NSMutableArray* aliasIfNecessary(NSArray* array) {
 
 static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     if ([array count] && [array isAliased]) {
-        unsigned i, max=[array count];
+        NSUInteger i, max=[array count];
         NSMutableArray* a=[NSMutableArray arrayWithCapacity:max];
         for (i=0; i<max; i++) {
             [a addObject:[[array objectAtIndex:i] unalias]];
@@ -219,7 +219,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 	//                      contextInfo:nil];
 }
 
-- (void)openPanelDidEnd:(NSOpenPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo {
+- (void)openPanelDidEnd:(NSOpenPanel*)panel returnCode:(NSUInteger)returnCode contextInfo:(void*)contextInfo {
     NSUserDefaults* defaults=[NSUserDefaults standardUserDefaults];
     if (returnCode == NSOKButton) {
         NSArray* filesToOpen = [panel URLs];
@@ -234,7 +234,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (void)processAndAddURLs:(NSArray*)urls {
-    unsigned i, max=[urls count];
+    NSUInteger i, max=[urls count];
     [self saveUndoableState];
     for (i=0; i<max; i++) {
         [myFileHierarchyArray addObject:[urls objectAtIndex:i]];
@@ -347,7 +347,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 - (IBAction)openDocument:(id)sender {
     NSOpenPanel* panel=[NSOpenPanel openPanel];
     NSUserDefaults* prefs=[NSUserDefaults standardUserDefaults];
-    int result;
     [panel setCanChooseFiles:YES];
     [panel setCanChooseDirectories:NO];
     [panel setResolvesAliases:YES];
@@ -355,7 +354,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 	
 	NSURL *directory = [[NSURL alloc] initWithString:[prefs objectForKey:@"DefaultSlideshowDirectory"]];
 	[panel setDirectoryURL: directory];
-    result=[panel runModal];
+    NSUInteger result=[panel runModal];
 			
     if (result==NSOKButton) [self openSlideshowWithUrl:[[panel URLs] objectAtIndex:0]];
 }
@@ -393,8 +392,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (IBAction)saveDocumentAs:(id)sender {
     NSSavePanel* panel=[NSSavePanel savePanel];
-    int result;
-    result=[panel runModal];
+    NSInteger result=[panel runModal];
     if (result==NSFileHandlingPanelOKButton) {
         myCurrentSavingPath=[[[panel URL] absoluteString] copy];
         [self saveDocument:sender];
@@ -554,11 +552,10 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (void)recursiveSort:(int (*)(id, id, void*))func onArray:(NSMutableArray*)array {
-    unsigned i, max;
     NSMutableDictionary* context=[NSMutableDictionary dictionary];
     [array sortUsingFunction:func context:(__bridge void * _Nullable)(context)];
-    max=[array count];
-    for (i=0; i < max; i++) {
+    NSUInteger max=[array count];
+    for (NSUInteger i=0; i < max; i++) {
         id object=[array objectAtIndex:i];
         if ([object isFolder]) {
             [self recursiveSort:func onArray:[object contents]];
@@ -569,7 +566,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 - (void)recursiveSortSelected:(int (*)(id, id, void*))func onArray:(NSMutableArray*)array {
 	
 	NSIndexSet *indexes=[myFilesTable selectedRowIndexes];
-    unsigned i, max;
+    NSUInteger i, max;
     BOOL needToDig=NO;
     NSMutableDictionary* context=[NSMutableDictionary dictionary];
     NSMutableArray* newContents=[NSMutableArray array];
@@ -578,8 +575,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 	NSUInteger row = [indexes firstIndex];
 	while (row != NSNotFound) {
         id object=[myFilesTable itemAtRow:row];
-        unsigned arrayIndex;
-        arrayIndex=[array indexOfObjectIdenticalTo:object];
+        NSUInteger arrayIndex=[array indexOfObjectIdenticalTo:object];
         if (arrayIndex != NSNotFound) {
             [modifiedIndices addObject:[NSNumber numberWithUnsignedInt:arrayIndex]];
             [newContents addObject:object];
@@ -721,7 +717,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (void)recursiveReverseSelected:(NSMutableArray*)array {
 	NSIndexSet *indexes=[myFilesTable selectedRowIndexes];
-    unsigned i, max;
+    NSUInteger i, max;
     BOOL needToDig=NO;
     NSMutableArray* newContents=[NSMutableArray array];
     NSMutableArray* modifiedIndices=[NSMutableArray array];
@@ -730,10 +726,9 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 	while (row != NSNotFound) {
         id object=[myFilesTable itemAtRow:row];
 
-        unsigned arrayIndex;
-        arrayIndex=[array indexOfObjectIdenticalTo:object];
+        NSUInteger arrayIndex=[array indexOfObjectIdenticalTo:object];
         if (arrayIndex != NSNotFound) {
-            [modifiedIndices addObject:[NSNumber numberWithUnsignedInt:arrayIndex]];
+            [modifiedIndices addObject:[NSNumber numberWithUnsignedInteger:arrayIndex]];
             [newContents insertObject:object atIndex:0];
         } else {
 			needToDig=YES;
@@ -771,7 +766,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (IBAction)displayImageInWindow:(id)sender {
-    int row=[myFilesTable selectedRow];
+    NSUInteger row=[myFilesTable selectedRow];
     if (row > -1) {
         id hierarchy=[myFilesTable itemAtRow:row];
         if (hierarchy!=nil && ![hierarchy isFolder]) {

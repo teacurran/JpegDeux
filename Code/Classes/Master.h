@@ -70,7 +70,7 @@ typedef enum {
 }
 
 - (IBAction)selectFiles:(id)sender;
-- (void)openPanelDidEnd:(NSOpenPanel*)sheet returnCode:(int)returnCode contextInfo:(void*)contextInfo;
+- (void)openPanelDidEnd:(NSOpenPanel*)sheet returnCode:(NSUInteger)returnCode contextInfo:(void*)contextInfo;
 - (IBAction)setDisplayMode:(id)sender;
 - (IBAction)setLoop:(id)sender;
 - (IBAction)setRandomOrder:(id)sender;

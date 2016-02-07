@@ -10,12 +10,6 @@
 
 @implementation WindowShow
 
-- (void)dealloc {
-    [myWindow release];
-    [myImageView release];
-    [super dealloc];
-}
-
 - (void)beginShow:(NSArray*)files {
     myWindow=[[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 800, 600)
                                styleMask:NSTitledWindowMask | NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask

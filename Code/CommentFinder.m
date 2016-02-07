@@ -75,7 +75,7 @@ static NSString* process_COM(int file) {
             else translatedString[translateIndex++]='?';
         }
 		
-		return [[[NSString alloc] initWithBytes:translatedString length:translateIndex encoding:NSASCIIStringEncoding] autorelease];
+		return [[NSString alloc] initWithBytes:translatedString length:translateIndex encoding:NSASCIIStringEncoding];
     }
     return nil;
 }

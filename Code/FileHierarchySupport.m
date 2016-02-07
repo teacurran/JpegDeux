@@ -161,7 +161,6 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
     for (i=0; i<max; i++) {
         id hierarchy=[contents objectAtIndex:i];
         if ([hierarchy isEqual:item]) {
-            [[[contents objectAtIndex:i] retain] autorelease];
             [contents removeObjectAtIndex:i];
             return YES;
         }

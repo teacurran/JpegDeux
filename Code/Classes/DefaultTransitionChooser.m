@@ -34,9 +34,9 @@ static NSMutableDictionary* sTransitionViews;
             NSRunAlertPanel(@"Nib error", @"JPEGDeux couldn't load %@.nib",
                             @"D'oh!", nil, nil, [self nibName]);
             result=nil;
+        } else {
+            [sTransitionViews setObject:result forKey:[self nibName]];
         }
-        else [sTransitionViews setObject:result forKey:[self nibName]];
-        [result release];
     }
     return result;
 }

@@ -92,7 +92,6 @@ static NSString* displayStringForKey(unichar key) {
 - (void)loadPrefs {
     NSUserDefaults* prefs=[NSUserDefaults standardUserDefaults];
     NSData* defs;
-    [myKeyBindings release];
     myKeyBindings=nil;
     defs=[prefs objectForKey:KeyBindingsKey];
     if (defs==nil) [self revertToDefaults:self];
@@ -134,7 +133,7 @@ static NSString* displayStringForKey(unichar key) {
         mySelectorDisplayStrings=[[NSDictionary alloc] initWithObjects:displayers
                                                                forKeys:selectors
                                                                  count:sizeof selectors/sizeof *selectors];
-        button=[[[NSPopUpButtonCell alloc] initTextCell:displayers[0] pullsDown:NO] autorelease];
+        button=[[NSPopUpButtonCell alloc] initTextCell:displayers[0] pullsDown:NO];
         for (i=1; i < sizeof displayers / sizeof *displayers; i++) {
             [button addItemWithTitle:displayers[i]];
         }
@@ -184,7 +183,6 @@ static NSString* displayStringForKey(unichar key) {
 }
 
 - (IBAction)revertToDefaults:(id)sender {
-    [myKeyBindings release];
     myKeyBindings=[[NSMutableArray alloc] initWithObjects:
         [KeyBinding bindingWithKey:NSRightArrowFunctionKey action:@selector(kbNextPic:)],
         [KeyBinding bindingWithKey:NSLeftArrowFunctionKey action:@selector(kbPrevPic:)],
@@ -238,7 +236,7 @@ static NSString* displayStringForKey(unichar key) {
             if (result==NSCancelButton) return;
 			NSURL *pathUrl = [[panel URLs] objectAtIndex:0];
             NSString *path=[pathUrl absoluteString];
-            kb->param=[path retain];
+            kb->param=path;
         }
         kb->action=newSel;
     }
@@ -295,13 +293,8 @@ static NSString* displayStringForKey(unichar key) {
 
 @implementation KeyBinding
 
-- (void)dealloc {
-    [param release];
-    [super dealloc];
-}
-
 + (KeyBinding*)bindingWithKey:(unichar)nkey action:(SEL)naction {
-    KeyBinding* kb=[[[self alloc] init] autorelease];
+    KeyBinding* kb=[[self alloc] init];
     kb->action=naction;
     kb->key=nkey;
     return kb;
@@ -312,7 +305,7 @@ static NSString* displayStringForKey(unichar key) {
     [coder decodeValueOfObjCType:@encode(int) at:&version];
     [coder decodeValueOfObjCType:@encode(SEL) at:&action];
     [coder decodeValueOfObjCType:@encode(unichar) at:&key];
-    param=[[coder decodeObject] retain];
+    param=[coder decodeObject];
     return self;
 }
 

@@ -16,7 +16,4 @@
 - (int)intPerformSelector:(SEL)selector withObject:(id)anObject;
 - (int)intPerformSelector:(SEL)selector withObject:(id)anObject withObject:(id)moObject;
 
-//returns true if the receiver is c or inherits from c
-+ (BOOL)inheritsFromClass:(Class)c;
-
 @end

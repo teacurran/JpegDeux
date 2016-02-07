@@ -78,9 +78,8 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (void)loadTransitionChooser {
     Class class;
-    [myTransitionChooser autorelease];
     class=[DefaultTransitionChooser classForShowTypeByTag:[myDisplayModeClass tagNumber]];
-    myTransitionChooser=[[class loadView] retain];
+    myTransitionChooser=[class loadView];
     [myTransitionDrawer setContentView:[myTransitionChooser view]];
 }
 
@@ -95,12 +94,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
         [self loadTransitionChooser];
     }
     return self;
-}
-
-- (void)dealloc {
-    [myUndoer release];
-    [myFileHierarchyArray release];
-    [super dealloc];
 }
 
 - (void)showWindow {
@@ -169,9 +162,8 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     myQuality=[dict intForKey:@"ImageQuality"];
     myCommentDisplay=[dict intForKey:@"CommentDisplay"];
     if (myQuality < MINQUALITY || myQuality > MAXQUALITY) myQuality=MINQUALITY;
-    [myFileHierarchyArray release];
     oldFiles=[dict objectForKey:@"ChosenFiles"];
-    myBackgroundColor=[unarchive([dict objectForKey:@"BackgroundColor"]) retain];
+    myBackgroundColor=unarchive([dict objectForKey:@"BackgroundColor"]);
 //    if (! oldFiles) myFileHierarchyArray=[[NSMutableArray alloc] init];
 //    else myFileHierarchyArray=[[NSMutableArray alloc] initWithArray:unaliasIfNecessary(oldFiles)];
     myFileHierarchyArray=[[NSMutableArray alloc] init];
@@ -262,7 +254,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (void)processAndAddFiles:(NSArray*)files {
     //[myChosenFiles mergeWithArray:[self prepareFilesAndDirectories:files]];
-    unsigned i, max=[files count];
+    long i, max=[files count];
     [self saveUndoableState];
     for (i=0; i<max; i++) {
         id fileHierarchy=[FileHierarchy hierarchyWithPath:[files objectAtIndex:i]];
@@ -316,8 +308,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (IBAction)setBackgroundColor:(id)sender {
-    [myBackgroundColor release];
-    myBackgroundColor=[[sender color] retain];
+    myBackgroundColor=[sender color];
     [myPreview setColor:myBackgroundColor];
     //[myPreview setNeedsDisplay:YES];
 }
@@ -344,10 +335,12 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     if (! dict) NSBeep();
     else {
         [self loadFromDictionary:dict];
-        [myCurrentSavingPath release];
         myCurrentSavingPath=[[url absoluteString] copy];
         [[NSDocumentController sharedDocumentController]
-		 noteNewRecentDocumentURL:[NSURL fileURLWithPath:path]];
+
+         // todo: this was the old code, I don't know how it worked but arc didn't like it - tcurran- 2016-02-07
+         //noteNewRecentDocumentURL:[NSURL fileURLWithPath:path]];
+         noteNewRecentDocumentURL:[NSURL fileURLWithPath:myCurrentSavingPath]];
     }
 }
 
@@ -403,7 +396,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     int result;
     result=[panel runModal];
     if (result==NSFileHandlingPanelOKButton) {
-        [myCurrentSavingPath release];
         myCurrentSavingPath=[[[panel URL] absoluteString] copy];
         [self saveDocument:sender];
     }
@@ -411,7 +403,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (IBAction)begin:(id)sender {
     NSMutableArray* arr=[[NSMutableArray alloc] init];
-    unsigned i, max=[myFileHierarchyArray count];
+    long i, max=[myFileHierarchyArray count];
     for (i=0; i<max; i++) [arr addObjectsFromArray:[FileHierarchy flattenHierarchy:[myFileHierarchyArray objectAtIndex:i]]];
     myChosenFiles=arr;
     if ([myChosenFiles count]==0) {
@@ -422,7 +414,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 	myBackgroundColor = [myBackgroundColorWell color];
 
     [self savePreferenceSettings];
-    [myCurrentShow release];
     myCurrentShow=[[myDisplayModeClass alloc] initWithParams:[myTransitionChooser valueDictionary]];
     NS_DURING
 	
@@ -438,16 +429,12 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 		[(id)myCurrentShow preload];
 	}
     NS_HANDLER
-        [myCurrentShow release];
         myCurrentShow=nil;
-        [myChosenFiles release];
         myChosenFiles=nil;
         return;
     NS_ENDHANDLER
     [self displayImageLoop];
-    [myCurrentShow release];
     myCurrentShow=nil;
-    [myChosenFiles release];
     myChosenFiles=nil;
 }
 
@@ -466,7 +453,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (void)displayImageLoop {
     NSDate* date;
-    NSAutoreleasePool* pool=nil;
     const BOOL drawerIsOpen=([myDrawer state]==NSDrawerOpenState || [myDrawer state]==NSDrawerOpeningState);
     [myWindow orderOut:self];
     date=[NSDate date];
@@ -484,7 +470,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
                 NSDate* finishDate;
                 CFAbsoluteTime timeOfDisplay;
                 EventAction action;
-                pool=[[NSAutoreleasePool alloc] init];
                 shouldContinue=[myCurrentShow advanceImage:&timeOfDisplay];
 
 				action=eNothing;
@@ -501,8 +486,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
                                                      dequeue:YES];
                 } while (event && !(action=[self handleEvent:event]));
 				
-                [pool release];
-                pool=nil;
                 switch (action) {
                     case eStop:
 						myShouldLoop=NO;
@@ -526,8 +509,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 	}
 	
         //NSLog(@"%f", [[NSDate date] timeIntervalSinceDate:date]); //used for timing shows
-        [pool release];
-        pool=nil;
 
         if (drawerIsOpen) [myDrawer close];
         [myWindow makeKeyAndOrderFront:self];
@@ -575,7 +556,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 - (void)recursiveSort:(int (*)(id, id, void*))func onArray:(NSMutableArray*)array {
     unsigned i, max;
     NSMutableDictionary* context=[NSMutableDictionary dictionary];
-    [array sortUsingFunction:func context:context];
+    [array sortUsingFunction:func context:(__bridge void * _Nullable)(context)];
     max=[array count];
     for (i=0; i < max; i++) {
         id object=[array objectAtIndex:i];
@@ -609,7 +590,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 		//increment
 		row = [indexes indexGreaterThanIndex: row];
 	}
-    [newContents sortUsingFunction:func context:context];
+    [newContents sortUsingFunction:func context:(__bridge void * _Nullable)(context)];
     max=[modifiedIndices count];
     for (i=0; i < max; i++) {
         unsigned index=[[modifiedIndices objectAtIndex:i] unsignedIntValue];
@@ -625,14 +606,12 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (void)saveUndoableState {
-    NSMutableArray* arr=[[myFileHierarchyArray deepMutableCopy] autorelease];
+    NSMutableArray* arr=[myFileHierarchyArray deepMutableCopy];
     [myUndoer registerUndoWithTarget:self selector:@selector(undoState:) object:arr];
 }
 
 - (void)undoState:(id)object {
     [self saveUndoableState];
-    [myFileHierarchyArray autorelease];
-    myFileHierarchyArray=[object retain];
     [myFilesTable reloadData];
 }
 
@@ -719,18 +698,17 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (IBAction)flattenImageHierarchy:(id)sender {
     NSMutableArray* arr=[[NSMutableArray alloc] init];
-    unsigned i, max=[myFileHierarchyArray count];
+    NSUInteger i, max=[myFileHierarchyArray count];
     [self showWindow];
     for (i=0; i<max; i++)
         [arr addObjectsFromArray:[FileHierarchy flattenHierarchy:[myFileHierarchyArray objectAtIndex:i]]];
     [self saveUndoableState];
-    [myFileHierarchyArray autorelease];
     myFileHierarchyArray=arr;
     [myFilesTable reloadData];
 }
 
 - (void)recursiveReverseAll:(NSMutableArray*)array {
-    unsigned i, max;
+    NSUInteger i, max;
     [array reverse];
     max=[array count];
     for (i=0; i < max; i++) {

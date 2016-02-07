@@ -19,8 +19,8 @@
     NSMutableArray* myChosenFiles;
     int myCurrentImageIndex;
     NSImage* myNextImage;
-    NSArray* myCachedImages;
-    NSArray* myCachedImageComments;
+    NSMutableArray* myCachedImages;
+    NSMutableArray* myCachedImageComments;
     BetterImageScaling myScaling;
     FileNameDisplay myFileNameDisplay;
     float myRotation;

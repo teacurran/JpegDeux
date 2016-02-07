@@ -15,7 +15,6 @@
 
 - (id)initWithParams:(NSDictionary*)params {
     if ([[params objectForKey:@"Transition"] intValue] && [self class]==[ScreenShow class]) {
-        [self dealloc];
         return [[TransitionScreenShow alloc] initWithParams:params];
     }
     return [super initWithParams:params];
@@ -25,10 +24,6 @@
     [NSMenu setMenuBarVisible:YES];
 
     [myCoveringWindow orderOut:self];
-    [myContext release];
-    [myCoveringWindow release];
-    [myImageView release];
-    [super dealloc];
 }
 
 - (void)beginShow:(NSArray*)files {
@@ -46,7 +41,7 @@
     [NSMenu setMenuBarVisible:NO];
     
     [myCoveringWindow makeKeyAndOrderFront:self];
-    myContext=[[NSGraphicsContext graphicsContextWithWindow:myCoveringWindow] retain];
+    myContext=[NSGraphicsContext graphicsContextWithWindow:myCoveringWindow];
     [super beginShow:files];
 }
 

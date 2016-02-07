@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface JPEGDeuxAppDelegate : NSObject <NSApplicationDelegate> {
-    NSWindow *window;
+    __unsafe_unretained NSWindow *window;
 }
 
 @property (assign) IBOutlet NSWindow *window;

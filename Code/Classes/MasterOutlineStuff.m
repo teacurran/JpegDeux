@@ -130,7 +130,6 @@
     for (i=0; i<max; i++) {
         id hierarchy=[myFileHierarchyArray objectAtIndex:i];
         if ([hierarchy isEqual:item]) {
-            [[[myFileHierarchyArray objectAtIndex:i] retain] autorelease];
             [myFileHierarchyArray removeObjectAtIndex:i];
             return YES;
         } else if ([hierarchy removeHierarchy:item]) return YES;
@@ -165,7 +164,7 @@
         else {
             hierarchy=[myFilesTable itemAtRow:row];
             if (hierarchy!=nil && ![hierarchy isFolder])
-                image=[[[NSImage alloc] initWithContentsOfFile:hierarchy] autorelease];
+                image=[[NSImage alloc] initWithContentsOfFile:hierarchy];
         }
         [self redoPreviewImageName];
         [myPreview setImage:image];

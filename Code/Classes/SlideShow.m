@@ -14,17 +14,6 @@
 
 @implementation SlideShow
 
-- (void)dealloc {
-    [myCommentField release];
-    [myCommentWindow release];
-    [myChosenFiles release];
-    [myNextImage release];
-    [myCachedImages release];
-    [myCachedImageComments release];
-    [myFileComments release];
-    [super dealloc];
-}
-
 - (id)initWithParams:(NSDictionary*)params {
     return [self init];
 }
@@ -102,13 +91,11 @@
     if (myCommentStyle==windowComment) [self updateWindowComments];
     *timeOfDisplay=CFAbsoluteTimeGetCurrent();
     if (++myCurrentImageIndex >= [myChosenFiles count]) return NO;
-    [myNextImage release];
     [self loadNextImage];
     return YES;
 }
 
 - (void)loadNextImage {
-    [myFileComments release];
     myFileComments=nil;
     if (myCachedImages==nil) {
         const NSSize zeroSize={0,0};
@@ -135,14 +122,12 @@
                 continue;
             }
             if (NSEqualSizes([myNextImage size], zeroSize)) {
-                [myNextImage release];
                 [myChosenFiles removeObjectAtIndex:myCurrentImageIndex--];
                 continue;
             }
             if (myCommentStyle) {
                 myFileComments=[commentsForJPEGFile(path) componentsJoinedByString:@"\n"];
                 if (! [myFileComments length]) myFileComments=nil;
-                [myFileComments retain];
             }
             //[myNextImage setDataRetained:YES];
             return;
@@ -154,9 +139,7 @@
         if (myCommentStyle) {
             myFileComments=[myCachedImageComments objectAtIndex:myCurrentImageIndex];
             if (myFileComments==(id)[NSNull null]) myFileComments=nil;
-            [myFileComments retain];
         }
-        [myNextImage retain];
     }
 }
 
@@ -171,7 +154,6 @@
         myCurrentImageIndex = myCurrentImageIndex-count;
     }
 
-    [myNextImage release];
     [self loadNextImage];
 }
 
@@ -190,16 +172,11 @@
 - (void)reshuffle {
     [myChosenFiles shuffle];
     if (myCachedImages) {
-        id old=myCachedImages;
-        myCachedImages=[[myCachedImages shuffledArray] retain];
-        [old release];
+        [myCachedImages shuffle];
     }
     if (myCachedImageComments) {
-        id old=myCachedImageComments;
-        myCachedImageComments=[[myCachedImageComments shuffledArray] retain];
-        [old release];
+        [myCachedImageComments shuffle];
     }
-    [myNextImage release];
     [self loadNextImage];
 }
 
@@ -254,7 +231,7 @@
                                     @"might take up to %.1f megabytes of RAM. "
                                     @"Are you sure you wish to continue?", max, max==1 ? "" : "s", estimatedMB];
 
-        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText:@"Huge Precacheing!"];
         [alert setInformativeText:warningMessage];
         [alert addButtonWithTitle:@"Continue"];
@@ -324,22 +301,19 @@
             [arr addObject:image];
             [progress incrementBy:1.0];
         }
-        [image release];
     }
     if (![arr count]) ;//handle no files here
-    myCachedImages=[[NSArray alloc] initWithArray:arr];
-    if (myCommentStyle) myCachedImageComments=[[NSArray alloc] initWithArray:comments];
+    myCachedImages=[[NSMutableArray alloc] initWithArray:arr];
+    if (myCommentStyle) myCachedImageComments=[[NSMutableArray alloc] initWithArray:comments];
     [app endModalSession:session];
     NS_HANDLER
         if (! [[localException name] isEqualToString:NSAbortModalException]) [localException raise];
         else {
             [progressWindow orderOut:self];
-            [controller release];
             [NSException raise:CancelShowException format:@"Stop precacheing"];
         }
     NS_ENDHANDLER
     [progressWindow orderOut:self];
-    [controller release];
 }
 
 - (void)setQuality:(int)quality {

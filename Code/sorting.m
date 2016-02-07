@@ -6,7 +6,7 @@
 static NSDate* dateForJan1904() {		// utility to return a singleton reference NSDate
     static NSDate* Jan1904 = nil;
     if (!Jan1904) {
-        Jan1904 = [[NSDate dateWithString:@"1904-01-01 00:00:00 +0000"] retain];
+        Jan1904 = [NSDate dateWithString:@"1904-01-01 00:00:00 +0000"];
     }
     return Jan1904;
 }
@@ -19,8 +19,8 @@ static NSDate* convertUTCtoNSDate(UTCDateTime input) {
     } time;
     time.local = input;
     if (time.shifted) {
-        result = [[[NSDate alloc] initWithTimeInterval:time.shifted/65536
-                                             sinceDate:dateForJan1904()] autorelease];
+        result = [[NSDate alloc] initWithTimeInterval:time.shifted/65536
+                                             sinceDate:dateForJan1904()];
     }
     return result;
 }

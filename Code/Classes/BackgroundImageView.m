@@ -12,7 +12,7 @@
 
 - (id)initWithFrame:(NSRect)frame {
     if (self=[super initWithFrame:frame]) {
-        myBackgroundColor=[[NSColor blackColor] retain];
+        myBackgroundColor=[NSColor blackColor];
         myScaling=NSScaleNone;
         myNameAttributes=[[NSDictionary alloc] initWithObjectsAndKeys:
             [NSColor whiteColor], NSForegroundColorAttributeName,
@@ -24,14 +24,6 @@
 		
     }
     return self;
-}
-
--(void)dealloc {
-    [myBackgroundColor release];
-    [myImageName release];
-    [myNameAttributes release];
-	[myImageLabel release];
-    [super dealloc];
 }
 
 - (void)setRotation:(float)r {
@@ -47,7 +39,6 @@
 }
 
 - (void)setImageName:(NSString*)name {
-    [myImageName release];
     myImageName=[name copy];
 	
 }
@@ -93,7 +84,6 @@
 		
 		if (myImageLabel) {
 			[myImageLabel removeFromSuperview];
-			[myImageLabel release];
 		}
 		
 		myImageLabel = [[NSTextField alloc] initWithFrame:imageLabelRect];
@@ -110,9 +100,7 @@
 }
 
 - (void)setColor:(NSColor*)color {
-    [myBackgroundColor autorelease];
-    myBackgroundColor=[color retain];
-    [myNameAttributes release];
+    myBackgroundColor=color;
     myNameAttributes=[[NSDictionary alloc] initWithObjectsAndKeys:
         [NSColor whiteColor], NSForegroundColorAttributeName,
         myBackgroundColor, NSBackgroundColorAttributeName,
@@ -133,9 +121,7 @@
 
 - (void)setImage:(NSImage*)image {
 
-	[myImage release];
-
-	myImage=[image retain];
+    myImage=image;
 	
 	[imageView setImage:myImage];
 	

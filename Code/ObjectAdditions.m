@@ -31,12 +31,5 @@ typedef int(*intFuncTwo)(id, SEL, id, id);
     return func(self, selector, anObject, moObject);
 }
 
-+ (BOOL)inheritsFromClass:(Class)c {
-    do {
-        if (self == c) return YES;
-    } while ((self=[self superclass]));
-    return NO;
-}
-
 @end
 

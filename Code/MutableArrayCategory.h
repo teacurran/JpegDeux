@@ -8,12 +8,6 @@
 
 void shuffle(void** ptr, int count);
 
-@interface NSArray (ArrayCategory)
-
-- (NSArray*)shuffledArray;
-
-@end
-
 @interface NSMutableArray (MutableArrayCategory)
 
 //appends array to self except when the object is already in the array as determined by isEqual:

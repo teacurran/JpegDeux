@@ -15,14 +15,13 @@ static NSImage* originalImage;
 - (id)init {
     if (self=[super init]) {
         application=[NSApplication sharedApplication];
-        if (!originalImage) originalImage=[[application applicationIconImage] retain];
+        if (!originalImage) originalImage=[application applicationIconImage];
     }
     return self;
 }
 
 - (void)dealloc {
     [application setApplicationIconImage:originalImage];
-    [super dealloc];
 }
 
 - (void)setImage:(NSImage*)image {

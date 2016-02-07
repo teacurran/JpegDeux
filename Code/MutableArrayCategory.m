@@ -6,28 +6,7 @@
 
 #import "MutableArrayCategory.h"
 
-@implementation NSArray (ArrayCategory)
-
-- (NSArray*)shuffledArray {
-    NSArray* finalArray;
-    long i, count=[self count];
-    id* buff=malloc(count*sizeof(id));
-    if (!buff) return nil;
-    [self getObjects:buff];
-    for (i=count-1; i > 0; i--) {
-        long newPos=(arc4random()%i);
-        id temp=buff[i];
-        buff[i]=buff[newPos];
-        buff[newPos]=temp;
-    }
-    finalArray=[NSArray arrayWithObjects:buff count:count];
-    free(buff);
-    return finalArray;
-}
-
-@end
-
-@implementation NSMutableArray (MutableArrayCategory) 
+@implementation NSMutableArray (MutableArrayCategory)
 
 - (void)mergeWithArray:(NSArray*)array {
     long i, max=[array count];
@@ -40,13 +19,12 @@
 }
 
 - (void)shuffle {
-    long i, count=[self count];
-    for (i=count-1; i > 0; i--) {
-        long newPos=(arc4random()%i);
-        id temp=[[self objectAtIndex:i] retain];
-        [self replaceObjectAtIndex:i withObject:[self objectAtIndex:newPos]];
-        [self replaceObjectAtIndex:newPos withObject:temp];
-        [temp release];
+    NSUInteger count = [self count];
+    if (count < 1) return;
+    for (NSUInteger i = 0; i < count - 1; ++i) {
+        NSInteger remainingCount = count - i;
+        NSInteger exchangeIndex = i + arc4random_uniform((u_int32_t )remainingCount);
+        [self exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
     }
 }
 
@@ -55,8 +33,11 @@
     long i, max=[self count];
     for (i=0; i < max; i++) {
         id object=[self objectAtIndex:i];
-        if ([object respondsToSelector:_cmd]) [arr addObject:[[object deepMutableCopy] autorelease]];
-        else [arr addObject:[[object copy] autorelease]];
+        if ([object respondsToSelector:_cmd]) {
+            [arr addObject:[object deepMutableCopy]];
+        } else {
+            [arr addObject:[object copy]];
+        }
     }
     return arr;
 }

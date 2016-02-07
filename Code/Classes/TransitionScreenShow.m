@@ -45,13 +45,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [myOtherCoveringWindow orderOut:self];
-    [myOtherCoveringWindow release];
-    [myOtherImageView release];
-    [super dealloc];
-}
-
 - (void)beginShow:(NSArray*)files {
     myOtherCoveringWindow=[[NSWindow alloc] initWithContentRect:[[NSScreen mainScreen] frame]
                                                  styleMask:NSBorderlessWindowMask
@@ -152,10 +145,6 @@
 	[myOtherCoveringWindow setAnimations:[NSDictionary dictionaryWithObject:theAnimation forKey:@"frame"]];
 	[[myOtherCoveringWindow animator] setFrame:newViewFrame display:YES];
 
-	[theAnimation release];
-	
-
-	
 }
 
 - (void)fade:(NSImage*)image {
@@ -173,7 +162,6 @@
 	[animation setDuration: transitionSpeed];
 	[animation setAnimationCurve: NSAnimationEaseInOut];
 	[animation startAnimation];
-	[animation release];
 
     [myOtherCoveringWindow makeKeyAndOrderFront:self];
     [myCoveringWindow setAlphaValue:1];

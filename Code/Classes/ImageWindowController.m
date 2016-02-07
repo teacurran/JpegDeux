@@ -13,13 +13,6 @@ static NSMutableDictionary* sPathsToControllers;
 
 @implementation ImageWindowController
 
-- (void)dealloc {
-//    NSLog(@"Deallocing %@", myFilePath);
-    [myFilePath release];
-    [myImage release];
-    [super dealloc];
-}
-
 - (id)initForPath:(NSString*)path {
     NSWindow* window;
     NSRect imageRect={{0}};
@@ -27,7 +20,6 @@ static NSMutableDictionary* sPathsToControllers;
     NSSize imageViewSize={0};
     self=[super initWithWindowNibName:@"ImageWindow"];
     if (!self || ! path) {
-        [self release];
         self=nil;
     }
     else {
@@ -38,7 +30,6 @@ static NSMutableDictionary* sPathsToControllers;
         }
         else myImage=[[NSImage alloc] initByReferencingFile:myFilePath];
         if (! [myImage isValid]) {
-            [self release];
             self=nil;
         } else {
             imageRect.size=[myImage size];
@@ -66,7 +57,6 @@ static NSMutableDictionary* sPathsToControllers;
         if (c) {
             if (! sPathsToControllers) sPathsToControllers=[[NSMutableDictionary alloc] init];
             [sPathsToControllers setObject:c forKey:path];
-            [c release];
         }
     }
     return c;

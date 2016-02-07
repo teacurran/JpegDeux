@@ -11,7 +11,6 @@
 #import "ScreenShow.h"
 #import "DockShow.h"
 //#import "FSQTShow.h"
-#import "DirectDisplayShow.h"
 #import "MutableArrayCategory.h"
 #import "StringAdditions.h"
 #import "ObjectAdditions.h"
@@ -155,7 +154,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 - (void)loadFromDictionary:(NSDictionary*)dict {
     int tag;
     NSArray* oldFiles;
-    const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class], [DirectDisplayShow class]};
+    const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class]};
     myShouldLoop=[dict boolForKey:@"ShouldLoop"];
     myShouldRandomize=[dict boolForKey:@"ShouldRandom"];
     myTimeInterval=[dict floatForKey:@"TimeInterval"];
@@ -273,7 +272,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (IBAction)setDisplayMode:(id)sender {
-    const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class], [DirectDisplayShow class]};
+    const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class]};
     myDisplayModeClass=classes[[[sender selectedCell] tag]%numShowTypes]; // for paranoia
     //if ([myDisplayModeClass inheritsFromClass:[QuicktimeShow class]]) [myQualitySlider setEnabled:YES];
     //else [myQualitySlider setEnabled:NO];

@@ -148,11 +148,13 @@
 }
 
 - (void)rewind:(int)count {
-    myCurrentImageIndex=0;
+    int newImageIndex = 0;
 
-    if (count != -1 && myCurrentImageIndex-count < 0) {
-        myCurrentImageIndex = myCurrentImageIndex-count;
+    if (count != -1 && myCurrentImageIndex-count > 0) {
+        newImageIndex = myCurrentImageIndex-count;
     }
+    
+    myCurrentImageIndex = newImageIndex;
 
     [self loadNextImage];
 }

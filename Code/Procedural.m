@@ -1,10 +1,5 @@
 #include "Procedural.h"
 
-void fatalError(NSString* string) {
-    NSLog(@"Fatal error: %@", string);
-    exit(EXIT_FAILURE);
-}
-
 BOOL isPropertyList(NSString* path) {
     NSFileHandle* handle=[NSFileHandle fileHandleForReadingAtPath:path];
     int descriptor;

@@ -114,9 +114,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [myQualitySlider setFloatValue:myQuality];
     [myShouldPrecacheButton setIntValue:myShouldPrecache];
     [myShouldRecursivelyScanSubdirectoriesButton setIntValue:myShouldRecursivelyScanSubdirectories];
-    //if ([myDisplayModeClass inheritsFromClass:[QuicktimeShow class]]) [myQualitySlider setEnabled:YES];
-    //else [myQualitySlider setEnabled:NO];
-	[myQualitySlider setEnabled:NO];
     [myFilesTable reloadData];
     [myPreview setImageScaling:myScaling];
     [myDisplayCommentButton setIntValue:myCommentDisplay];
@@ -266,9 +263,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 - (IBAction)setDisplayMode:(id)sender {
     const id classes[]={[WindowShow class], [ScreenShow class], [DockShow class]};
     myDisplayModeClass=classes[[[sender selectedCell] tag]%numShowTypes]; // for paranoia
-    //if ([myDisplayModeClass inheritsFromClass:[QuicktimeShow class]]) [myQualitySlider setEnabled:YES];
-    //else [myQualitySlider setEnabled:NO];
-	[myQualitySlider setEnabled:NO];
     [self loadTransitionChooser];
 }
 

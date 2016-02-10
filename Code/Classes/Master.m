@@ -380,7 +380,12 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
             [[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:[NSURL fileURLWithPath:myCurrentSavingPath]];
         }
     NS_HANDLER
-        NSRunAlertPanel(@"Error saving file", [localException reason], @"Crud", nil, nil);
+        // NSRunAlertPanel(@"Error saving file", [localException reason], @"Crud", nil, nil);
+
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = @"Error saving file";
+        alert.informativeText = [localException reason];
+        [alert runModal];    
     NS_ENDHANDLER
 }
 
@@ -545,7 +550,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     return YES;
 }
 
-- (void)recursiveSort:(int (*)(id, id, void*))func onArray:(NSMutableArray*)array {
+- (void)recursiveSort:(NSInteger (*)(id, id, void*))func onArray:(NSMutableArray*)array {
     NSMutableDictionary* context=[NSMutableDictionary dictionary];
     [array sortUsingFunction:func context:(__bridge void * _Nullable)(context)];
     NSUInteger max=[array count];
@@ -557,7 +562,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     }
 }
 
-- (void)recursiveSortSelected:(int (*)(id, id, void*))func onArray:(NSMutableArray*)array {
+- (void)recursiveSortSelected:(NSInteger (*)(id, id, void*))func onArray:(NSMutableArray*)array {
 	
 	NSIndexSet *indexes=[myFilesTable selectedRowIndexes];
     NSUInteger i, max;
@@ -571,7 +576,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
         id object=[myFilesTable itemAtRow:row];
         NSUInteger arrayIndex=[array indexOfObjectIdenticalTo:object];
         if (arrayIndex != NSNotFound) {
-            [modifiedIndices addObject:[NSNumber numberWithUnsignedInt:arrayIndex]];
+            [modifiedIndices addObject:[NSNumber numberWithUnsignedInteger:arrayIndex]];
             [newContents addObject:object];
         } else {
 			needToDig=YES;
@@ -627,13 +632,13 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [myUndoer redo];
 }
 
-- (void)sort:(int (*)(id, id, void*))func {
+- (void)sort:(NSInteger (*)(id, id, void*))func {
     [self saveUndoableState];
     [self recursiveSort:func onArray:myFileHierarchyArray];
     [myFilesTable reloadData];
 }
 
-- (void)sortSelected:(int (*)(id, id, void*))func {
+- (void)sortSelected:(NSInteger (*)(id, id, void*))func {
     [self saveUndoableState];
     [self recursiveSortSelected:func onArray:myFileHierarchyArray];
     [myFilesTable reloadData];

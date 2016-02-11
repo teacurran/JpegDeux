@@ -72,13 +72,13 @@ static id loadValue(NSString* path, NSMutableDictionary* dict, NSString* key) {
     return value;
 }
 
-int sortName(id firstPath, id secondPath, void* param) {
+NSComparisonResult sortName(id firstPath, id secondPath, void* param) {
     NSString* first=[[firstPath filename] lastPathComponent];
     NSString* second=[[secondPath filename] lastPathComponent];
     return [first caseInsensitiveCompare:second];
 }
 
-int sortNumber(id firstPath, id secondPath, void* param) {
+NSComparisonResult sortNumber(id firstPath, id secondPath, void* param) {
     NSCharacterSet* set=nil;
     BOOL fIsBad=NO, sIsBad=NO;
     NSString* first=[[firstPath filename] lastPathComponent];
@@ -107,7 +107,7 @@ int sortNumber(id firstPath, id secondPath, void* param) {
     else return NSOrderedSame;
 }
 
-int sortModified(NSString* firstPath, NSString* secondPath, NSMutableDictionary* dict) {
+NSComparisonResult sortModified(NSString* firstPath, NSString* secondPath, NSMutableDictionary* dict) {
     NSDate* f, * s;
     NSString* first=[firstPath filename];
     NSString* second=[secondPath filename];
@@ -118,7 +118,7 @@ int sortModified(NSString* firstPath, NSString* secondPath, NSMutableDictionary*
     return [f compare:s];
 }
 
-int sortCreated(NSString* firstPath, NSString* secondPath, NSMutableDictionary* dict) {
+NSComparisonResult sortCreated(NSString* firstPath, NSString* secondPath, NSMutableDictionary* dict) {
     NSDate* f, * s;
     NSString* first=[firstPath filename];
     NSString* second=[secondPath filename];
@@ -129,6 +129,6 @@ int sortCreated(NSString* firstPath, NSString* secondPath, NSMutableDictionary* 
     return [f compare:s];
 }
 
-int sortKind(NSString* first, NSString* second, NSMutableDictionary* param) {
+NSComparisonResult sortKind(NSString* first, NSString* second, NSMutableDictionary* param) {
     return NSOrderedSame;
 }

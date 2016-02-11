@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
-int sortName(id, id, void*);
-int sortNumber(id, id, void*);
-int sortModified(id, id, NSMutableDictionary*);
-int sortCreated(id, id, NSMutableDictionary*);
-int sortKind(id, id, NSMutableDictionary*);
+NSComparisonResult sortName(id, id, void*);
+NSComparisonResult sortNumber(id, id, void*);
+NSComparisonResult sortModified(id, id, NSMutableDictionary*);
+NSComparisonResult sortCreated(id, id, NSMutableDictionary*);
+NSComparisonResult sortKind(id, id, NSMutableDictionary*);

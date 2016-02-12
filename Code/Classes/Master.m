@@ -50,7 +50,7 @@ static NSMutableArray* aliasIfNecessary(NSArray* array) {
         NSUInteger i, max=[array count];
         NSMutableArray* a=[NSMutableArray arrayWithCapacity:max];
         for (i=0; i<max; i++) {
-            [a addObject:[[array objectAtIndex:i] alias]];
+            [a addObject:[array[i] alias]];
         }
         return a;
     }
@@ -62,7 +62,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
         NSUInteger i, max=[array count];
         NSMutableArray* a=[NSMutableArray arrayWithCapacity:max];
         for (i=0; i<max; i++) {
-            [a addObject:[[array objectAtIndex:i] unalias]];
+            [a addObject:[array[i] unalias]];
         }
         return a;
     }
@@ -105,7 +105,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [myDisplayModeMatrix selectCellWithTag:[myDisplayModeClass tagNumber]];
     [myShouldLoopButton setIntValue:myShouldLoop];
     [myShouldRandomizeButton setIntValue:myShouldRandomize];
-    [myTimeIntervalField setFloatValue:myTimeInterval];
+    [myTimeIntervalField setFloatValue:(float) myTimeInterval];
 	[myBackgroundColorWell setColor:myBackgroundColor];
     [myShouldAutoAdvanceButton setIntValue:myShouldAutoAdvance];
     [myScalingMatrix selectCellWithTag:myScaling];
@@ -125,7 +125,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     NSMutableDictionary* dict=[NSMutableDictionary dictionaryWithCapacity:11];
     [dict setBool:myShouldLoop forKey:@"ShouldLoop"];
     [dict setBool:myShouldRandomize forKey:@"ShouldRandom"];
-    [dict setFloat:myTimeInterval forKey:@"TimeInterval"];
+    [dict setFloat:(float) myTimeInterval forKey:@"TimeInterval"];
     [dict setInt:[myDisplayModeClass tagNumber] forKey:@"DisplayMode"];
     [dict setBool:myShouldAutoAdvance forKey:@"ShouldAutoAdvance"];
     [dict setInt:myScaling forKey:@"ScalingMode"];
@@ -134,10 +134,10 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [dict setBool:myShouldRecursivelyScanSubdirectories forKey:@"ShouldRecursivelyScanSubdirectories"];
     [dict setBool:myShouldPrecache forKey:@"PreloadImages"];
     [dict setInt:myQuality forKey:@"ImageQuality"];
-//    [dict setObject:aliasIfNecessary(myFileHierarchyArray) forKey:@"ChosenFiles"];
-    [dict setObject:archive(myBackgroundColor) forKey:@"BackgroundColor"];
+    // [dict setObject:aliasIfNecessary(myFileHierarchyArray) forKey:@"ChosenFiles"];
+    dict[@"BackgroundColor"] = archive(myBackgroundColor);
     [dict setInt:myCommentDisplay forKey:@"CommentDisplay"];
-    [dict setObject:[myTransitionChooser valueDictionary] forKey:@"TransitionValues"];
+    dict[@"TransitionValues"] = [myTransitionChooser valueDictionary];
     return dict;
 }
 
@@ -653,15 +653,15 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (IBAction)sortModified:(id)sender {
-    [self sort:sortModified];
+    [self sort:(NSInteger (*)(id, id, void *)) sortModified];
 }
 
 - (IBAction)sortCreated:(id)sender {
-    [self sort:sortCreated];
+    [self sort:(NSInteger (*)(id, id, void *)) sortCreated];
 }
 
 - (IBAction)sortKind:(id)sender {
-    [self sort:sortKind];
+    [self sort:(NSInteger (*)(id, id, void *)) sortKind];
 }
 
 - (IBAction)sortSelectedName:(id)sender {
@@ -673,15 +673,15 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (IBAction)sortSelectedModified:(id)sender {
-    [self sortSelected:sortModified];
+    [self sortSelected:(NSInteger (*)(id, id, void *)) sortModified];
 }
 
 - (IBAction)sortSelectedCreated:(id)sender {
-    [self sortSelected:sortCreated];
+    [self sortSelected:(NSInteger (*)(id, id, void *)) sortCreated];
 }
 
 - (IBAction)sortSelectedKind:(id)sender {
-    [self sortSelected:sortKind];
+    [self sortSelected:(NSInteger (*)(id, id, void *)) sortKind];
 }
 
 - (IBAction)removeAllImages:(id)sender {

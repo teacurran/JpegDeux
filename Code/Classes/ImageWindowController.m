@@ -51,12 +51,12 @@ static NSMutableDictionary* sPathsToControllers;
 
 + (ImageWindowController*)controllerForPath:(NSString*)path {
     ImageWindowController* c;
-    c=[sPathsToControllers objectForKey:path];
+    c= sPathsToControllers[path];
     if (! c) {
         c=[[self alloc] initForPath:path];
         if (c) {
             if (! sPathsToControllers) sPathsToControllers=[[NSMutableDictionary alloc] init];
-            [sPathsToControllers setObject:c forKey:path];
+            sPathsToControllers[path] = c;
         }
     }
     return c;

@@ -161,7 +161,7 @@ static NSString* displayStringForKey(unichar key) {
     long i, max=[sorted count];
     unichar lastKey=0;
     for (i=0; i<max; i++) {
-        KeyBinding* kb=[sorted objectAtIndex:i];
+        KeyBinding* kb= sorted[i];
         if (kb->key==lastKey) break;
         lastKey=kb->key;
     }
@@ -209,12 +209,12 @@ static NSString* displayStringForKey(unichar key) {
 }
 
 - (id)tableView:(NSTableView*)view objectValueForTableColumn:(NSTableColumn*)col row:(int)row {
-    KeyBinding* kb=[myKeyBindings objectAtIndex:row];
+    KeyBinding* kb= myKeyBindings[row];
     if ([[col identifier] isEqualToString:@"action"]) {
         int i;
         NSString* sel=NSStringFromSelector(kb->action);
         for (i=0; i < sizeof selectors / sizeof *selectors; i++) {
-            if ([sel isEqualToString:selectors[i]]) return [NSNumber numberWithInt:i];
+            if ([sel isEqualToString:selectors[i]]) return @(i);
         }
         return NULL;
     }
@@ -234,7 +234,7 @@ static NSString* displayStringForKey(unichar key) {
             [panel setResolvesAliases:YES];
             result=[panel runModal];
             if (result==NSCancelButton) return;
-			NSURL *pathUrl = [[panel URLs] objectAtIndex:0];
+			NSURL *pathUrl = [panel URLs][0];
             NSString *path=[pathUrl absoluteString];
             kb->param=path;
         }
@@ -244,7 +244,7 @@ static NSString* displayStringForKey(unichar key) {
 
 - (void)setKeyBinding:(NSString*)chars {
     NSInteger row=[myTable selectedRow];
-    KeyBinding* kb=[myKeyBindings objectAtIndex:row];
+    KeyBinding* kb= myKeyBindings[row];
     kb->key=[chars characterAtIndex:0];
     [myTable reloadData];
 }
@@ -266,7 +266,7 @@ static NSString* displayStringForKey(unichar key) {
 - (void)deleteRowsFromView:(NSTableView*)view {
     if ([view numberOfSelectedRows]) {
         NSInteger row=[view selectedRow];
-        [myKeyBindings removeObjectAtIndex:row];
+        [myKeyBindings removeObjectAtIndex:(NSUInteger) row];
         [view reloadData];
     }
     else NSBeep();
@@ -280,7 +280,7 @@ static NSString* displayStringForKey(unichar key) {
 - (SEL)selectorForKey:(unichar)key withParam:(id*)param {
     NSInteger i, max=[myKeyBindings count];
     for (i=0; i<max; i++) {
-        KeyBinding* kb=[myKeyBindings objectAtIndex:i];
+        KeyBinding* kb= myKeyBindings[i];
         if (kb->key == key) {
             if (param) *param=kb->param;
             return kb->action;

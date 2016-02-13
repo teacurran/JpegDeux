@@ -17,7 +17,7 @@
     NSEnumerator* enumer=[items objectEnumerator];
     id object;
     NSMutableArray* hier, * names;
-    [board declareTypes:[NSArray arrayWithObjects:HierarchyPBoardType, NSFilenamesPboardType, nil]
+    [board declareTypes:@[HierarchyPBoardType, NSFilenamesPboardType]
                   owner:nil];
     hier=[NSMutableArray arrayWithCapacity:[view numberOfSelectedRows]];
     names=[NSMutableArray arrayWithCapacity:[view numberOfSelectedRows]];
@@ -38,8 +38,8 @@
 - (BOOL)outlineView:(NSOutlineView*)view acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)index {
     NSPasteboard* board=[info draggingPasteboard];
     NSString* type;
-    type=[board availableTypeFromArray:[NSArray arrayWithObjects:HierarchyPBoardType,
-        NSFilenamesPboardType, nil]];
+    type= [board availableTypeFromArray:@[HierarchyPBoardType,
+                NSFilenamesPboardType]];
     if ([type isEqualToString:NSFilenamesPboardType]) {
         NSArray* files=[board propertyListForType:NSFilenamesPboardType];
         long i, max;
@@ -53,7 +53,7 @@
         max=[files count];
         if (index < 0) index=0;
         for (i=0; i<max; i++) {
-            NSString* path=[files objectAtIndex:i];
+            NSString* path= files[i];
             id hierarchy;
             if (myShouldRecursivelyScanSubdirectories) hierarchy=[FileHierarchy hierarchyWithPath:path];
             else hierarchy=[FileHierarchy folderContentsWithPath:path];
@@ -76,14 +76,14 @@
             oldContents=[NSArray arrayWithArray:contents];
             [self saveUndoableState];
             for (i=0; i<max; i++) {
-                id addingObject=[arr objectAtIndex:i];
+                id addingObject= arr[i];
                 [self removeHierarchy:addingObject];
             }
             //make sure that the array didn't just shift out from under us!
             if ([contents count] < [oldContents count]) {
                 max=[contents count];
                 for (i=0; i<max; i++) {
-                    if (! [[contents objectAtIndex:i] isEqual:[oldContents objectAtIndex:i]]) break;
+                    if (![contents[i] isEqual:oldContents[i]]) break;
                 }
                 //i should now contain the index of the place where the object was taken from
                 //note that it might be past the end of the array
@@ -110,10 +110,10 @@
 }
 
 - (id)outlineView:(NSOutlineView*)outlineView child:(int)index ofItem:(id)item {
-    if (item==nil) return [myFileHierarchyArray objectAtIndex:index];
+    if (item==nil) return myFileHierarchyArray[index];
     else {
         NSArray* arr=[item contents];
-        return [arr objectAtIndex:index];
+        return arr[index];
     }
 }
 
@@ -128,7 +128,7 @@
 - (BOOL)removeHierarchy:(id)item {
     NSInteger i, max=[myFileHierarchyArray count];
     for (i=0; i<max; i++) {
-        id hierarchy=[myFileHierarchyArray objectAtIndex:i];
+        id hierarchy= myFileHierarchyArray[i];
         if ([hierarchy isEqual:item]) {
             [myFileHierarchyArray removeObjectAtIndex:i];
             return YES;

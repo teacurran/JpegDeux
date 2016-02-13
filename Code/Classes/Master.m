@@ -38,9 +38,6 @@ static NSColor* unarchive(NSData* data) {
     else return [NSUnarchiver unarchiveObjectWithData:data];
 }
 
-#define MINQUALITY 1
-#define MAXQUALITY 5
-
 static Master* sharedMaster;
 static NSApplication* application;
 
@@ -111,7 +108,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [myScalingMatrix selectCellWithTag:myScaling];
     [myShouldOnlyScaleDownButton setIntValue:myShouldOnlyScaleDown];
     [myDisplayFileNameMatrix selectCellWithTag:myFileNameDisplay];
-    [myQualitySlider setFloatValue:myQuality];
     [myShouldPrecacheButton setIntValue:myShouldPrecache];
     [myShouldRecursivelyScanSubdirectoriesButton setIntValue:myShouldRecursivelyScanSubdirectories];
     [myFilesTable reloadData];
@@ -133,7 +129,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [dict setInt:myFileNameDisplay forKey:@"FileNameDisplayType"];
     [dict setBool:myShouldRecursivelyScanSubdirectories forKey:@"ShouldRecursivelyScanSubdirectories"];
     [dict setBool:myShouldPrecache forKey:@"PreloadImages"];
-    [dict setInt:myQuality forKey:@"ImageQuality"];
     // [dict setObject:aliasIfNecessary(myFileHierarchyArray) forKey:@"ChosenFiles"];
     dict[@"BackgroundColor"] = archive(myBackgroundColor);
     [dict setInt:myCommentDisplay forKey:@"CommentDisplay"];
@@ -156,11 +151,9 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     myFileNameDisplay=[dict intForKey:@"FileNameDisplayType"];
     myShouldRecursivelyScanSubdirectories=[dict boolForKey:@"ShouldRecursivelyScanSubdirectories"];
     myShouldPrecache=[dict boolForKey:@"PreloadImages"];
-    myQuality=[dict intForKey:@"ImageQuality"];
     myCommentDisplay=[dict intForKey:@"CommentDisplay"];
-    if (myQuality < MINQUALITY || myQuality > MAXQUALITY) myQuality=MINQUALITY;
-    oldFiles=[dict objectForKey:@"ChosenFiles"];
-    myBackgroundColor=unarchive([dict objectForKey:@"BackgroundColor"]);
+    oldFiles= dict[@"ChosenFiles"];
+    myBackgroundColor=unarchive(dict[@"BackgroundColor"]);
 //    if (! oldFiles) myFileHierarchyArray=[[NSMutableArray alloc] init];
 //    else myFileHierarchyArray=[[NSMutableArray alloc] initWithArray:unaliasIfNecessary(oldFiles)];
     myFileHierarchyArray=[[NSMutableArray alloc] init];
@@ -221,8 +214,8 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     if (returnCode == NSOKButton) {
         NSArray* filesToOpen = [panel URLs];
         if ([filesToOpen count] > 0) {
-            [defaults setObject:[[[filesToOpen objectAtIndex:0] absoluteString] stringByDeletingLastPathComponent] forKey:@"DefaultImageDirectory"];
-            [defaults setObject:[[[filesToOpen objectAtIndex:0] absoluteString] lastPathComponent] forKey:@"DefaultImageFile"];
+            [defaults setObject:[[filesToOpen[0] absoluteString] stringByDeletingLastPathComponent] forKey:@"DefaultImageDirectory"];
+            [defaults setObject:[[filesToOpen[0] absoluteString] lastPathComponent] forKey:@"DefaultImageFile"];
             [defaults synchronize];
         }
         [self processAndAddPaths:filesToOpen];
@@ -234,7 +227,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     NSUInteger i, max=[urls count];
     [self saveUndoableState];
     for (i=0; i<max; i++) {
-        [myFileHierarchyArray addObject:[urls objectAtIndex:i]];
+        [myFileHierarchyArray addObject:urls[i]];
     }
     [myFilesTable reloadData];
 }
@@ -254,7 +247,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     long i, max=[files count];
     [self saveUndoableState];
     for (i=0; i<max; i++) {
-        id fileHierarchy=[FileHierarchy hierarchyWithPath:[files objectAtIndex:i]];
+        id fileHierarchy= [FileHierarchy hierarchyWithPath:files[i]];
         [myFileHierarchyArray addObject:fileHierarchy];
     }
     [myFilesTable reloadData];
@@ -307,10 +300,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     //[myPreview setNeedsDisplay:YES];
 }
 
-- (IBAction)setQualitySlider:(id)sender {
-    myQuality=[sender intValue];
-}
-
 - (IBAction)setShouldPrecache:(id)sender {
     myShouldPrecache=[sender intValue];
 }
@@ -348,7 +337,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 	
 	NSURL *directory = [[NSURL alloc] initWithString:[prefs objectForKey:@"DefaultSlideshowDirectory"]];
 	[panel setDirectoryURL: directory];
-    NSUInteger result=[panel runModal];
+    NSUInteger result = (NSUInteger) [panel runModal];
 			
     if (result==NSOKButton) [self openSlideshowWithUrl:[[panel URLs] objectAtIndex:0]];
 }
@@ -364,11 +353,9 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
             else {
                 NSNumber* newCreator;
                 NSDictionary* attribs;
-                newCreator=[NSNumber numberWithUnsignedLong:gCreatorCode];
-                attribs=[NSDictionary dictionaryWithObjectsAndKeys:
-                    newCreator, NSFileHFSCreatorCode,
-                    newCreator, NSFileHFSTypeCode,
-                    nil];
+                newCreator= @(gCreatorCode);
+                attribs= @{NSFileHFSCreatorCode : newCreator,
+                        NSFileHFSTypeCode : newCreator};
 				
 				NSError *error = nil;
 				[filer setAttributes:attribs ofItemAtPath:myCurrentSavingPath error:&error];
@@ -420,7 +407,6 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [myCurrentShow setCommentStyle:myCommentDisplay];
     [myCurrentShow setFileNameDisplayType:myFileNameDisplay];
     [myCurrentShow beginShow:myChosenFiles];
-    [myCurrentShow setQuality:myQuality];
     [myCurrentShow setBackgroundColor:myBackgroundColor];
     if (myShouldPrecache) {
 		[(id)myCurrentShow preload];
@@ -546,7 +532,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
         isPropertyList(filename)) {
         [self openSlideshow:filename];
     }
-    else [self processAndAddFiles:[NSArray arrayWithObject:filename]];
+    else [self processAndAddFiles:@[filename]];
     return YES;
 }
 
@@ -555,7 +541,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [array sortUsingFunction:func context:(__bridge void * _Nullable)(context)];
     NSUInteger max=[array count];
     for (NSUInteger i=0; i < max; i++) {
-        id object=[array objectAtIndex:i];
+        id object= array[i];
         if ([object isFolder]) {
             [self recursiveSort:func onArray:[object contents]];
         }
@@ -594,7 +580,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     if (needToDig) {
         max=[array count];
         for (i=0; i<max; i++) {
-            id object=[array objectAtIndex:i];
+            id object= array[i];
             if ([object isFolder]) [self recursiveSortSelected:func onArray:[object contents]];
         }
     }
@@ -696,7 +682,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     NSUInteger i, max=[myFileHierarchyArray count];
     [self showWindow];
     for (i=0; i<max; i++)
-        [arr addObjectsFromArray:[FileHierarchy flattenHierarchy:[myFileHierarchyArray objectAtIndex:i]]];
+        [arr addObjectsFromArray:[FileHierarchy flattenHierarchy:myFileHierarchyArray[i]]];
     [self saveUndoableState];
     myFileHierarchyArray=arr;
     [myFilesTable reloadData];
@@ -707,7 +693,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [array reverse];
     max=[array count];
     for (i=0; i < max; i++) {
-        id object=[array objectAtIndex:i];
+        id object = array[i];
         if ([object isFolder]) {
             [self recursiveReverseAll:[object contents]];
         }
@@ -727,7 +713,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
         NSUInteger arrayIndex=[array indexOfObjectIdenticalTo:object];
         if (arrayIndex != NSNotFound) {
-            [modifiedIndices addObject:[NSNumber numberWithUnsignedInteger:arrayIndex]];
+            [modifiedIndices addObject:@(arrayIndex)];
             [newContents insertObject:object atIndex:0];
         } else {
 			needToDig=YES;
@@ -744,7 +730,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     if (needToDig) {
         max=[array count];
         for (i=0; i<max; i++) {
-            id object=[array objectAtIndex:i];
+            id object= array[i];
             if ([object isFolder]) [self recursiveReverseSelected:[object contents]];
         }
     }

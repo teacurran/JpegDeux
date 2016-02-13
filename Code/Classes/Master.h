@@ -41,7 +41,6 @@ typedef enum {
     CFTimeInterval myTimeInterval;
     BetterImageScaling myScaling;
     NSString* myCurrentSavingPath;
-    int myQuality; //1 through 5, 1 is lowest, 5 is highest
     NSMutableArray* myFileHierarchyArray;
     NSColor* myBackgroundColor;
     NSUndoManager* myUndoer;
@@ -61,7 +60,6 @@ typedef enum {
     IBOutlet NSTextField* myTimeIntervalField;
     IBOutlet NSWindow* myWindow;
     IBOutlet PrefsManager* myPrefsManager;
-    IBOutlet NSSlider* myQualitySlider;
     IBOutlet NSButton* myShouldPrecacheButton;
     IBOutlet NSDrawer* myDrawer;
     IBOutlet BackgroundImageView* myPreview;
@@ -80,7 +78,6 @@ typedef enum {
 - (IBAction)setShouldOnlyScaleDown:(id)sender;
 - (IBAction)setShouldRecursivelyScanSubdirectories:(id)sender;
 - (IBAction)setFileNameDisplayType:(id)sender;
-- (IBAction)setQualitySlider:(id)sender;
 - (IBAction)setShouldPrecache:(id)sender;
 - (IBAction)setCommentDisplay:(id)sender;
 - (IBAction)begin:(id)sender;

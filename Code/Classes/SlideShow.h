@@ -62,9 +62,6 @@
 //subclasses can override
 - (long)estimatedSizeOfCachedImages;
 
-//SlideShow just ignores, QuicktimeShow makes use
-- (void)setQuality:(int)quality;
-
 - (void)preload;
 
 

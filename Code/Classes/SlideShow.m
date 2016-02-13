@@ -318,10 +318,6 @@
     [progressWindow orderOut:self];
 }
 
-- (void)setQuality:(int)quality {
-
-}
-
 - (void)setBackgroundColor:(NSColor*)color {
 
 }

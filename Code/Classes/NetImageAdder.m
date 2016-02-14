@@ -10,18 +10,17 @@
     NSString* startNumber, * endNumber;
     NSString* first=[myFirstURLField stringValue];
     NSString* last=[myLastURLField stringValue];
-    int startValue, endValue;
     BOOL padZeros;
     char padWidth[32];
     NSString* formatString;
     /* Treat URLs as three pieces: prefix, number, suffix */
     /* Strategy: find first different character, die if it's not a digit,
         backtrack until we have all the digits, check for zero padding */
-    if ([first isEqualToString:last]) return [NSArray arrayWithObject:first];
+    if ([first isEqualToString:last]) return @[first];
     prefix=[first commonPrefixWithString:last options:0];
     if (! [prefix length]) return nil;
 
-    long i;
+    NSUInteger i;
     for (i=[prefix length]; i>0; i--) {
         if (! isdigit([prefix characterAtIndex:i-1])) break;
     }
@@ -50,8 +49,8 @@
     sprintf(padWidth+1, "%lu", (unsigned long)[endNumber length]);
     padWidth[0]='0';
     formatString=[NSString stringWithFormat:@"%%@%%%sd%%@", padZeros ? padWidth : ""];
-    startValue=[startNumber intValue];
-    endValue=[endNumber intValue];
+    NSUInteger startValue = (NSUInteger) [startNumber intValue];
+    NSUInteger endValue = (NSUInteger) [endNumber intValue];
     result=[NSMutableArray arrayWithCapacity:endValue-startValue+1];
     //NSLog(@"Format string: %@", formatString);
     for (i=startValue; i<=endValue; i++) {
@@ -75,7 +74,7 @@
 }
 
 - (void)controlTextDidChange:(NSNotification*)note {
-    NSTextView* fieldEditor=[[note userInfo] objectForKey:@"NSFieldEditor"];
+    NSTextView* fieldEditor= [note userInfo][@"NSFieldEditor"];
     NSTextField* field=[note object];
     NSString* first, * second;
     if (field==myFirstURLField) {
@@ -91,6 +90,7 @@
 
 - (IBAction)showDialog:(id)sender {
     if (! myWindow) {
+
         if (! [NSBundle loadNibNamed:@"InternetImages" owner:self] || !myWindow) {
             NSRunAlertPanel(@"Nib error", @"JPEGDeux couldn't open InternetImages.nib",
                             @"D'oh!", nil, nil);

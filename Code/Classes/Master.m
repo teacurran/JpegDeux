@@ -724,8 +724,8 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     }
     max=[modifiedIndices count];
     for (i=0; i < max; i++) {
-        unsigned index=[[modifiedIndices objectAtIndex:i] unsignedIntValue];
-        [array replaceObjectAtIndex:index withObject:[newContents objectAtIndex:i]];
+        unsigned index=[modifiedIndices[i] unsignedIntValue];
+        array[index] = newContents[i];
     }
     if (needToDig) {
         max=[array count];
@@ -751,7 +751,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (IBAction)displayImageInWindow:(id)sender {
-    NSUInteger row=[myFilesTable selectedRow];
+    NSInteger row=[myFilesTable selectedRow];
     if (row > -1) {
         id hierarchy=[myFilesTable itemAtRow:row];
         if (hierarchy!=nil && ![hierarchy isFolder]) {

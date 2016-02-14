@@ -19,8 +19,8 @@
     NSMutableArray* hier, * names;
     [board declareTypes:@[HierarchyPBoardType, NSFilenamesPboardType]
                   owner:nil];
-    hier=[NSMutableArray arrayWithCapacity:[view numberOfSelectedRows]];
-    names=[NSMutableArray arrayWithCapacity:[view numberOfSelectedRows]];
+    hier = [NSMutableArray arrayWithCapacity:(NSUInteger) [view numberOfSelectedRows]];
+    names = [NSMutableArray arrayWithCapacity:(NSUInteger) [view numberOfSelectedRows]];
     while ((object=[enumer nextObject])) {
         [hier addObject:object];
         [names addObject:[object filename]];
@@ -42,7 +42,8 @@
                 NSFilenamesPboardType]];
     if ([type isEqualToString:NSFilenamesPboardType]) {
         NSArray* files=[board propertyListForType:NSFilenamesPboardType];
-        long i, max;
+        long max;
+        NSUInteger i;
         NSMutableArray* contents;
         if (item && ! [item isFolder]) {
             return NO;
@@ -90,7 +91,7 @@
                 if (i < index) index--;
             }
             if (index < 0 ) index=0;
-            [contents replaceObjectsInRange:NSMakeRange(index, 0)
+            [contents replaceObjectsInRange:NSMakeRange((NSUInteger) index, 0)
                        withObjectsFromArray:arr];
             [myFilesTable reloadData];
         }
@@ -109,7 +110,7 @@
     else return 0;
 }
 
-- (id)outlineView:(NSOutlineView*)outlineView child:(int)index ofItem:(id)item {
+- (id)outlineView:(NSOutlineView*)outlineView child:(NSUInteger)index ofItem:(id)item {
     if (item==nil) return myFileHierarchyArray[index];
     else {
         NSArray* arr=[item contents];

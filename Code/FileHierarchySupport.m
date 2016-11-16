@@ -48,10 +48,14 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
 				}
             }
             [result setContents:hierarchyContents];
-        }
-        else {
+        } else {
             result=[path resolveAliasesIsDir:nil];
-            if ([[result lastPathComponent] characterAtIndex:0]=='.') result=nil;
+            CFStringRef fileExtension = (__bridge CFStringRef)[result pathExtension];
+            CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+
+            if (!UTTypeConformsTo(fileUTI, kUTTypeImage)) {
+                result=nil;
+            }
         } 
     }
     return result;

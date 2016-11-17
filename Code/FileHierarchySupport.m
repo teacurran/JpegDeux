@@ -81,14 +81,25 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
                 NSString* dirPath=[dirContents objectAtIndex:i];
                 dirPath=[path stringByAppendingPathComponent:dirPath];
                 dirPath=[dirPath resolveAliasesIsDir:&innerIsDir];
-                if (! innerIsDir && [[dirPath lastPathComponent] characterAtIndex:0]!='.')
+
+                CFStringRef fileExtension = (__bridge CFStringRef)[dirPath pathExtension];
+                CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+
+                if (UTTypeConformsTo(fileUTI, kUTTypeImage)) {
                     [hierarchyContents addObject:dirPath];
+                }
             }
             [result setContents:hierarchyContents];
         }
         else {
             result=path;
-            if ([[result lastPathComponent] characterAtIndex:0]=='.') result=nil;
+
+            CFStringRef fileExtension = (__bridge CFStringRef)[result pathExtension];
+            CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+            
+            if (!UTTypeConformsTo(fileUTI, kUTTypeImage)) {
+                result = nil;
+            }
         }
     }
     return result;

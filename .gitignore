@@ -16,3 +16,7 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+*.log
+.sonar/
+sonar-reports/
+compile_commands.json

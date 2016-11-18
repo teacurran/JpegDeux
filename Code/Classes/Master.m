@@ -236,7 +236,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     //[myChosenFiles mergeWithArray:[self prepareFilesAndDirectories:files]];
     [self saveUndoableState];
 	for (NSURL *url in urls) {
-        id fileHierarchy=[FileHierarchy hierarchyWithPath:[url path]];
+        id fileHierarchy=[FileHierarchy hierarchyWithPath:[url path] recursive:myShouldRecursivelyScanSubdirectories];
         [myFileHierarchyArray addObject:fileHierarchy];
     }
     [myFilesTable reloadData];
@@ -247,7 +247,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     long i, max=[files count];
     [self saveUndoableState];
     for (i=0; i<max; i++) {
-        id fileHierarchy= [FileHierarchy hierarchyWithPath:files[i]];
+        id fileHierarchy= [FileHierarchy hierarchyWithPath:files[i] recursive:myShouldRecursivelyScanSubdirectories];
         [myFileHierarchyArray addObject:fileHierarchy];
     }
     [myFilesTable reloadData];

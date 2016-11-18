@@ -56,7 +56,7 @@
         for (i=0; i<max; i++) {
             NSString* path= files[i];
             id hierarchy;
-            if (myShouldRecursivelyScanSubdirectories) hierarchy=[FileHierarchy hierarchyWithPath:path];
+            if (myShouldRecursivelyScanSubdirectories) hierarchy=[FileHierarchy hierarchyWithPath:path recursive:myShouldRecursivelyScanSubdirectories];
             else hierarchy=[FileHierarchy folderContentsWithPath:path];
             if (hierarchy) [contents insertObject:hierarchy atIndex:index++];
         }

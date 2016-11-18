@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
@@ -461,7 +462,6 @@ DQ
                                     </connections>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="712">
                             <rect key="frame" x="-100" y="-100" width="229" height="15"/>
@@ -624,6 +624,7 @@ DQ
             <connections>
                 <outlet property="delegate" destination="194" id="665"/>
             </connections>
+            <point key="canvasLocation" x="139" y="-132.5"/>
         </window>
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="373" userLabel="Preferences">
             <windowStyleMask key="styleMask" titled="YES"/>
@@ -639,11 +640,11 @@ DQ
                         <rect key="frame" x="34" y="122" width="313" height="351"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="miG-et-kCI">
-                            <rect key="frame" x="1" y="23" width="311" height="327"/>
+                            <rect key="frame" x="1" y="0.0" width="311" height="350"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" headerView="715" floatsGroupRows="NO" id="377" customClass="KeyBindingTable">
-                                    <rect key="frame" x="0.0" y="0.0" width="296" height="26"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="311" height="327"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -680,7 +681,6 @@ DQ
                                     </connections>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="714">
                             <rect key="frame" x="-100" y="-100" width="420" height="15"/>

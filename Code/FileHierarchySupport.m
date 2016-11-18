@@ -24,14 +24,13 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
 @implementation FileHierarchy
 
 //could possibly rewrite using subpathsAtPath?
-+ (id)hierarchyWithPath:(NSString*)path {
++ (id)hierarchyWithPath:(NSString*)path recursive:(BOOL)recursive {
     id result=nil;
     NSFileManager* filer=[NSFileManager defaultManager];
     BOOL isDir;
     path=[path resolveAliasesIsDir:&isDir];
     if (path != nil) {
         if (isDir) {
-			
 			NSError *error = nil;
 			NSArray* dirContents = [filer contentsOfDirectoryAtPath:path error:&error];
 			
@@ -40,9 +39,18 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
             result=[NSMutableArray arrayWithCapacity:2];
             [result setFilename:path];
             for (i=0; i<max; i++) {
-                NSString* dirPath=[dirContents objectAtIndex:i];
-                dirPath=[path stringByAppendingPathComponent:dirPath];
-                id innerHierarchy=[self hierarchyWithPath:dirPath];
+                NSString* fileName=[dirContents objectAtIndex:i];
+                NSString* filePath=[path stringByAppendingPathComponent:fileName];
+                BOOL fileIsDir;
+                filePath = [filePath resolveAliasesIsDir:&fileIsDir];
+                
+                id innerHierarchy;
+                if (fileIsDir && recursive) {
+                    innerHierarchy = [self hierarchyWithPath:filePath recursive:recursive];
+                } else if (!fileIsDir) {
+                    innerHierarchy = [self hierarchyWithPath:filePath recursive:recursive];
+                }
+
                 if (innerHierarchy) {
 					[hierarchyContents addObject:innerHierarchy];
 				}

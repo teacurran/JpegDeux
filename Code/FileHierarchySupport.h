@@ -10,7 +10,7 @@
 
 @interface FileHierarchy : NSObject
 
-+ (id)hierarchyWithPath:(NSString*)path recursive:(BOOL)recursive;
++ (NSMutableArray*)hierarchyWithPath:(NSString*)path recursive:(BOOL)recursive;
 
 + (NSMutableArray*)flattenHierarchy:(id)hierarchy;
 

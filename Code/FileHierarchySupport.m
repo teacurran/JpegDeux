@@ -47,14 +47,25 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
                 id innerHierarchy;
                 if (fileIsDir && recursive) {
                     innerHierarchy = [self hierarchyWithPath:filePath recursive:recursive];
+                    // only add the inner directory if it has files in it
+                    if (innerHierarchy) {
+                        NSMutableArray* innerDirectory = (NSMutableArray*)innerHierarchy;
+                        if ([innerDirectory count] == 2) {
+                            if ([(NSMutableArray*)innerDirectory[1] count] > 0) {
+                                [hierarchyContents addObject:innerHierarchy];
+                            }
+                        }
+                    }
+                    
                 } else if (!fileIsDir) {
                     innerHierarchy = [self hierarchyWithPath:filePath recursive:recursive];
-                }
 
-                if (innerHierarchy) {
-					[hierarchyContents addObject:innerHierarchy];
-				}
+                    if (innerHierarchy) {
+                        [hierarchyContents addObject:innerHierarchy];
+                    }
+                }
             }
+            
             [result setContents:hierarchyContents];
         } else {
             result=[path resolveAliasesIsDir:nil];

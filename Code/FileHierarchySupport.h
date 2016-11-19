@@ -10,11 +10,7 @@
 
 @interface FileHierarchy : NSObject
 
-//hierarchyWithPath is deep (recursive)
 + (id)hierarchyWithPath:(NSString*)path recursive:(BOOL)recursive;
-
-//this one is shallow (self and contents)
-+ (id)folderContentsWithPath:(NSString*)path;
 
 + (NSMutableArray*)flattenHierarchy:(id)hierarchy;
 

@@ -54,11 +54,10 @@
         max=[files count];
         if (index < 0) index=0;
         for (i=0; i<max; i++) {
-            NSString* path= files[i];
-            id hierarchy;
-            if (myShouldRecursivelyScanSubdirectories) hierarchy=[FileHierarchy hierarchyWithPath:path recursive:myShouldRecursivelyScanSubdirectories];
-            else hierarchy=[FileHierarchy folderContentsWithPath:path];
-            if (hierarchy) [contents insertObject:hierarchy atIndex:index++];
+            id hierarchy=[FileHierarchy hierarchyWithPath:files[i] recursive:myShouldRecursivelyScanSubdirectories];
+            if (hierarchy) {
+                [contents insertObject:hierarchy atIndex:index++];
+            }
         }
         [myFilesTable reloadData];
         return YES;

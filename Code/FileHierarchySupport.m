@@ -69,50 +69,6 @@ static void flattenHierarchy(id hierarchy, NSMutableArray* array) {
     return result;
 }
 
-+ (id)folderContentsWithPath:(NSString*)path {
-    id result=nil;
-
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-
-    BOOL isDir;
-    path=[path resolveAliasesIsDir:&isDir];
-    if (path != nil) {
-        if (isDir) {
-
-            NSArray<NSString *>* dirContents=[fileManager contentsOfDirectoryAtPath:path error:nil];
-            long i, max=[dirContents count];
-            NSMutableArray* hierarchyContents=[NSMutableArray arrayWithCapacity:max];
-            result=[NSMutableArray arrayWithCapacity:2];
-            [result setFilename:path];
-            for (i=0; i<max; i++) {
-                BOOL innerIsDir;
-                NSString* dirPath=[dirContents objectAtIndex:i];
-                dirPath=[path stringByAppendingPathComponent:dirPath];
-                dirPath=[dirPath resolveAliasesIsDir:&innerIsDir];
-
-                CFStringRef fileExtension = (__bridge CFStringRef)[dirPath pathExtension];
-                CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-
-                if (UTTypeConformsTo(fileUTI, kUTTypeImage)) {
-                    [hierarchyContents addObject:dirPath];
-                }
-            }
-            [result setContents:hierarchyContents];
-        }
-        else {
-            result=path;
-
-            CFStringRef fileExtension = (__bridge CFStringRef)[result pathExtension];
-            CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-            
-            if (!UTTypeConformsTo(fileUTI, kUTTypeImage)) {
-                result = nil;
-            }
-        }
-    }
-    return result;
-}
-
 + (NSMutableArray*)flattenHierarchy:(id)hierarchy {
     NSMutableArray* arr=[NSMutableArray array];
     flattenHierarchy(hierarchy, arr);

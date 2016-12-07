@@ -11,5 +11,7 @@
 
 #import "Classes/BackgroundImageView.h"
 #import "PetersTypes.h"
+#import "Scaling.h"
+#import "sorting.h"
 
 #endif /* JpegDeux_Bridging_Header_h */

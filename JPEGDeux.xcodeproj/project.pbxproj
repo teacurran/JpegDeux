@@ -224,7 +224,6 @@
 				0A052D38085C74ED0037FF42 /* Scaling.m */,
 				F5B329510200F14901FDC0B7 /* Code */,
 				F52D57E502CFCBBC01CCFEE7 /* Bugs 'n Features */,
-				F52D57E402CFCB9201CCFEE7 /* Other Code */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				93A273641DF77D83000319F3 /* JPEGDeuxTests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -331,22 +330,6 @@
 			name = Shows;
 			sourceTree = "<group>";
 		};
-		F52D57E402CFCB9201CCFEE7 /* Other Code */ = {
-			isa = PBXGroup;
-			children = (
-				93A31A4E171A3E1F00528ABE /* Scaling.m */,
-				F503B36D03590DDE01168C0E /* sorting.h */,
-				F503B36E03590DDE01168C0E /* sorting.m */,
-				F5B329680200F14901FDC0B7 /* PetersTypes.h */,
-				F5B3296A0200F14901FDC0B7 /* Procedural.h */,
-				F52FF8700202FA8201FDC0B7 /* Procedural.m */,
-				F5ABD38602693CCA01FDC0B7 /* blitters.s */,
-				F521B07202ED27D101F32A68 /* Scaling.h */,
-			);
-			name = "Other Code";
-			path = Code;
-			sourceTree = "<group>";
-		};
 		F52D57E502CFCBBC01CCFEE7 /* Bugs 'n Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,13 +376,21 @@
 		F5B329510200F14901FDC0B7 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				F5ABD38602693CCA01FDC0B7 /* blitters.s */,
 				F5B329530200F14901FDC0B7 /* Classes */,
 				F5E53AA2038B5BCE01FD9FBC /* CommentFinder.h */,
 				F5E53AA3038B5BCE01FD9FBC /* CommentFinder.m */,
+				93A273721DF78DD5000319F3 /* JpegDeux-Bridging-Header.h */,
 				F506C87E0392755201FD9FBC /* NetImageAdder.h */,
 				F506C87D0392755201FD9FBC /* NetImageAdder.m */,
+				F5B329680200F14901FDC0B7 /* PetersTypes.h */,
+				F5B3296A0200F14901FDC0B7 /* Procedural.h */,
+				F52FF8700202FA8201FDC0B7 /* Procedural.m */,
+				F521B07202ED27D101F32A68 /* Scaling.h */,
+				93A31A4E171A3E1F00528ABE /* Scaling.m */,
+				F503B36D03590DDE01168C0E /* sorting.h */,
+				F503B36E03590DDE01168C0E /* sorting.m */,
 				F551C7D7C5B0390101C88848 /* Transitions */,
-				93A273721DF78DD5000319F3 /* JpegDeux-Bridging-Header.h */,
 			);
 			path = Code;
 			sourceTree = "<group>";

@@ -15,6 +15,8 @@
 		9396590B171A356F00286CB9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9396590A171A356F00286CB9 /* Cocoa.framework */; };
 		9396590D171A36F200286CB9 /* DefaultTransitionChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = F506D21903931DED01FD9FBC /* DefaultTransitionChooser.m */; };
 		9396590F171A36F200286CB9 /* ScreenShowTransitionChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = F551C7D9C5B0390101C88848 /* ScreenShowTransitionChooser.m */; };
+		93A273661DF77D83000319F3 /* JPEGDeuxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A273651DF77D83000319F3 /* JPEGDeuxTests.swift */; };
+		93A273711DF78A26000319F3 /* BackgroundImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A273701DF78A26000319F3 /* BackgroundImageViewTests.swift */; };
 		93A31A3C171A3B1700528ABE /* FileHierarchySupport.m in Sources */ = {isa = PBXBuildFile; fileRef = F511236902DAD47301CCB2D9 /* FileHierarchySupport.m */; };
 		93A31A3D171A3B4400528ABE /* PreviewImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5492B3C02DD82F00171CBD8 /* PreviewImageView.m */; };
 		93A31A3E171A3B4400528ABE /* WindowMovingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E53CF8038BA75901FD9FBC /* WindowMovingTextField.m */; };
@@ -62,6 +64,16 @@
 		93E45F6814638D8D00C5C55B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E45F1214638A3000C5C55B /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		93A273681DF77D83000319F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93E45F0B14638A3000C5C55B;
+			remoteInfo = JPEGDeux;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0A052D38085C74ED0037FF42 /* Scaling.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Scaling.m; path = Code/Scaling.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -75,6 +87,11 @@
 		93965901171A1EA100286CB9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93965908171A234400286CB9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		9396590A171A356F00286CB9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		93A273631DF77D83000319F3 /* JPEGDeuxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JPEGDeuxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A273651DF77D83000319F3 /* JPEGDeuxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPEGDeuxTests.swift; sourceTree = "<group>"; };
+		93A273671DF77D83000319F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93A273701DF78A26000319F3 /* BackgroundImageViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundImageViewTests.swift; path = Code/Classes/BackgroundImageViewTests.swift; sourceTree = "<group>"; };
+		93A273721DF78DD5000319F3 /* JpegDeux-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JpegDeux-Bridging-Header.h"; sourceTree = "<group>"; };
 		93A31A4E171A3E1F00528ABE /* Scaling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scaling.m; sourceTree = "<group>"; };
 		93A31A57171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/DefaultTransitionView.nib; sourceTree = "<group>"; };
 		93A31A59171A40A400528ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = JPEGDeux/en.lproj/ImageWindow.nib; sourceTree = "<group>"; };
@@ -121,8 +138,8 @@
 		F589FE9D02EA993B014E77C5 /* MyWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWindowController.m; sourceTree = "<group>"; };
 		F589FE9E02EA993B014E77C5 /* MyWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWindowController.h; sourceTree = "<group>"; };
 		F5ABD38602693CCA01FDC0B7 /* blitters.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = blitters.s; sourceTree = "<group>"; };
-		F5B329550200F14901FDC0B7 /* BackgroundImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BackgroundImageView.h; path = Classes/BackgroundImageView.h; sourceTree = "<group>"; };
-		F5B329560200F14901FDC0B7 /* BackgroundImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BackgroundImageView.m; path = Classes/BackgroundImageView.m; sourceTree = "<group>"; };
+		F5B329550200F14901FDC0B7 /* BackgroundImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackgroundImageView.h; sourceTree = "<group>"; };
+		F5B329560200F14901FDC0B7 /* BackgroundImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackgroundImageView.m; sourceTree = "<group>"; };
 		F5B329570200F14901FDC0B7 /* BetterTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BetterTable.h; path = Classes/BetterTable.h; sourceTree = "<group>"; };
 		F5B329580200F14901FDC0B7 /* BetterTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BetterTable.m; path = Classes/BetterTable.m; sourceTree = "<group>"; };
 		F5B329590200F14901FDC0B7 /* DockShow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DockShow.h; sourceTree = "<group>"; };
@@ -161,6 +178,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		93A273601DF77D83000319F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93E45F0914638A3000C5C55B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				93E45F0C14638A3000C5C55B /* JPEGDeux.app */,
+				93A273631DF77D83000319F3 /* JPEGDeuxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,6 +226,7 @@
 				F52D57E502CFCBBC01CCFEE7 /* Bugs 'n Features */,
 				F52D57E402CFCB9201CCFEE7 /* Other Code */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				93A273641DF77D83000319F3 /* JPEGDeuxTests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -250,6 +276,32 @@
 				93965901171A1EA100286CB9 /* main.m */,
 			);
 			path = JPEGDeux;
+			sourceTree = "<group>";
+		};
+		93A273641DF77D83000319F3 /* JPEGDeuxTests */ = {
+			isa = PBXGroup;
+			children = (
+				93A2736E1DF789C7000319F3 /* Code */,
+				93A273651DF77D83000319F3 /* JPEGDeuxTests.swift */,
+				93A273671DF77D83000319F3 /* Info.plist */,
+			);
+			path = JPEGDeuxTests;
+			sourceTree = "<group>";
+		};
+		93A2736E1DF789C7000319F3 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				93A2736F1DF789CC000319F3 /* Classes */,
+			);
+			name = Code;
+			sourceTree = "<group>";
+		};
+		93A2736F1DF789CC000319F3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				93A273701DF78A26000319F3 /* BackgroundImageViewTests.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		93E45F0F14638A3000C5C55B /* Other Frameworks */ = {
@@ -341,14 +393,13 @@
 		F5B329510200F14901FDC0B7 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				F5B329550200F14901FDC0B7 /* BackgroundImageView.h */,
-				F5B329560200F14901FDC0B7 /* BackgroundImageView.m */,
 				F5B329530200F14901FDC0B7 /* Classes */,
 				F5E53AA2038B5BCE01FD9FBC /* CommentFinder.h */,
 				F5E53AA3038B5BCE01FD9FBC /* CommentFinder.m */,
 				F506C87E0392755201FD9FBC /* NetImageAdder.h */,
 				F506C87D0392755201FD9FBC /* NetImageAdder.m */,
 				F551C7D7C5B0390101C88848 /* Transitions */,
+				93A273721DF78DD5000319F3 /* JpegDeux-Bridging-Header.h */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -356,6 +407,8 @@
 		F5B329530200F14901FDC0B7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F5B329550200F14901FDC0B7 /* BackgroundImageView.h */,
+				F5B329560200F14901FDC0B7 /* BackgroundImageView.m */,
 				F5B3295D0200F14901FDC0B7 /* Master.h */,
 				F5B3295E0200F14901FDC0B7 /* Master.m */,
 				F53E929502EA3AE901549C9E /* MasterEventAction.h */,
@@ -374,6 +427,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		93A273621DF77D83000319F3 /* JPEGDeuxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93A2736A1DF77D83000319F3 /* Build configuration list for PBXNativeTarget "JPEGDeuxTests" */;
+			buildPhases = (
+				93A2735F1DF77D83000319F3 /* Sources */,
+				93A273601DF77D83000319F3 /* Frameworks */,
+				93A273611DF77D83000319F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				93A273691DF77D83000319F3 /* PBXTargetDependency */,
+			);
+			name = JPEGDeuxTests;
+			productName = JPEGDeuxTests;
+			productReference = 93A273631DF77D83000319F3 /* JPEGDeuxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		93E45F0B14638A3000C5C55B /* JPEGDeux */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93E45F2514638A3000C5C55B /* Build configuration list for PBXNativeTarget "JPEGDeux" */;
@@ -397,7 +468,15 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
+				TargetAttributes = {
+					93A273621DF77D83000319F3 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 93E45F0B14638A3000C5C55B;
+					};
+				};
 			};
 			buildConfigurationList = 0A052D32085C74660037FF42 /* Build configuration list for PBXProject "JPEGDeux" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -411,11 +490,19 @@
 			projectRoot = "";
 			targets = (
 				93E45F0B14638A3000C5C55B /* JPEGDeux */,
+				93A273621DF77D83000319F3 /* JPEGDeuxTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		93A273611DF77D83000319F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93E45F0A14638A3000C5C55B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -439,6 +526,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		93A2735F1DF77D83000319F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93A273711DF78A26000319F3 /* BackgroundImageViewTests.swift in Sources */,
+				93A273661DF77D83000319F3 /* JPEGDeuxTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93E45F0814638A3000C5C55B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,6 +575,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		93A273691DF77D83000319F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93E45F0B14638A3000C5C55B /* JPEGDeux */;
+			targetProxy = 93A273681DF77D83000319F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		939658F9171A1EA100286CB9 /* InfoPlist.strings */ = {
@@ -625,6 +729,164 @@
 			};
 			name = Default;
 		};
+		93A2736B1DF77D83000319F3 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = JPEGDeuxTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.approachingpi.JPEGDeuxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Code/JpegDeux-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JPEGDeux.app/Contents/MacOS/JPEGDeux";
+			};
+			name = Development;
+		};
+		93A2736C1DF77D83000319F3 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = JPEGDeuxTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.approachingpi.JPEGDeuxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Code/JpegDeux-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JPEGDeux.app/Contents/MacOS/JPEGDeux";
+			};
+			name = Deployment;
+		};
+		93A2736D1DF77D83000319F3 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = JPEGDeuxTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.approachingpi.JPEGDeuxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Code/JpegDeux-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JPEGDeux.app/Contents/MacOS/JPEGDeux";
+			};
+			name = Default;
+		};
 		93E45F2614638A3000C5C55B /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -719,6 +981,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
+		};
+		93A2736A1DF77D83000319F3 /* Build configuration list for PBXNativeTarget "JPEGDeuxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93A2736B1DF77D83000319F3 /* Development */,
+				93A2736C1DF77D83000319F3 /* Deployment */,
+				93A2736D1DF77D83000319F3 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		93E45F2514638A3000C5C55B /* Build configuration list for PBXNativeTarget "JPEGDeux" */ = {
 			isa = XCConfigurationList;

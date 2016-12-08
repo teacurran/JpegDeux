@@ -22,7 +22,6 @@ class BackgroundImageViewTests: XCTestCase {
     }
 
     func testShouldBeAbleToScaleToFit() {
-        
         let backgroundImageView: BackgroundImageView = BackgroundImageView(frame: screenSize)
         backgroundImageView.setImageScaling(ScaleToFit)
         
@@ -33,6 +32,19 @@ class BackgroundImageViewTests: XCTestCase {
         let sizeScaled2 = backgroundImageView.scaledSize(for: NSSize(width: 220, height: 423))
         XCTAssertEqual(screenSize.height, sizeScaled2.height)
         XCTAssertEqual(screenSize.width, sizeScaled2.width)
-   
     }
+
+    func testShouldBeAbleToScaleToNone() {
+        let backgroundImageView: BackgroundImageView = BackgroundImageView(frame: screenSize)
+        backgroundImageView.setImageScaling(ScaleNone)
+        
+        let sizeScaled = backgroundImageView.scaledSize(for: NSSize(width: 600, height: 200))
+        XCTAssertEqual(200, sizeScaled.height)
+        XCTAssertEqual(600, sizeScaled.width)
+        
+        let sizeScaled2 = backgroundImageView.scaledSize(for: NSSize(width: 220, height: 423))
+        XCTAssertEqual(423, sizeScaled2.height)
+        XCTAssertEqual(220, sizeScaled2.width)
+    }
+
 }

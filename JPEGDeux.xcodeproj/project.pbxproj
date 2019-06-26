@@ -32,7 +32,6 @@
 		93A31A4F171A3E1F00528ABE /* Scaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A31A4E171A3E1F00528ABE /* Scaling.m */; };
 		93A31A64171A40A400528ABE /* DefaultTransitionView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A56171A40A400528ABE /* DefaultTransitionView.nib */; };
 		93A31A65171A40A400528ABE /* ImageWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A58171A40A400528ABE /* ImageWindow.nib */; };
-		93A31A66171A40A400528ABE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A5A171A40A400528ABE /* InfoPlist.strings */; };
 		93A31A67171A40A400528ABE /* InternetImages.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A5C171A40A400528ABE /* InternetImages.nib */; };
 		93A31A68171A40A400528ABE /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A5E171A40A400528ABE /* MainMenu.nib */; };
 		93A31A69171A40A400528ABE /* Preload.nib in Resources */ = {isa = PBXBuildFile; fileRef = 93A31A60171A40A400528ABE /* Preload.nib */; };
@@ -508,7 +507,6 @@
 				93965903171A1EA100286CB9 /* InfoPlist.strings in Resources */,
 				93A31A64171A40A400528ABE /* DefaultTransitionView.nib in Resources */,
 				93A31A65171A40A400528ABE /* ImageWindow.nib in Resources */,
-				93A31A66171A40A400528ABE /* InfoPlist.strings in Resources */,
 				93A31A67171A40A400528ABE /* InternetImages.nib in Resources */,
 				93A31A68171A40A400528ABE /* MainMenu.nib in Resources */,
 				93A31A69171A40A400528ABE /* Preload.nib in Resources */,

@@ -41,32 +41,6 @@ static NSColor* unarchive(NSData* data) {
 static Master* sharedMaster;
 static NSApplication* application;
 
-static NSMutableArray* aliasIfNecessary(NSArray* array) {
-    NSUserDefaults* prefs=[NSUserDefaults standardUserDefaults];
-    if (! [prefs boolForKey:@"DontAliasDictionaries"]) {
-        NSUInteger i, max=[array count];
-        NSMutableArray* a=[NSMutableArray arrayWithCapacity:max];
-        for (i=0; i<max; i++) {
-            [a addObject:[array[i] alias]];
-        }
-        return a;
-    }
-    else return [NSMutableArray arrayWithArray:array];
-}
-
-static NSMutableArray* unaliasIfNecessary(NSArray* array) {
-    if ([array count] && [array isAliased]) {
-        NSUInteger i, max=[array count];
-        NSMutableArray* a=[NSMutableArray arrayWithCapacity:max];
-        for (i=0; i<max; i++) {
-            [a addObject:[array[i] unalias]];
-        }
-        return a;
-    }
-    else return [NSMutableArray arrayWithArray:array];
-}
-
-
 @implementation Master
 
 + (Master*)master {

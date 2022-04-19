@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "FixedBitmapImageRep.h"
 #import <Foundation/NSDebug.h>
 
 #define MAKE_CODE(a,b,c,d) ( ((unsigned long)a << 24 ) + \
@@ -20,10 +19,6 @@ const unsigned long gSSTypeCode = MAKE_CODE('J', 'p', 'g', 'D');
 
 int main(int argc, char *argv[])
 {
-	//    NSZombieEnabled=YES;
-    //[FixedBitmapImageRep poseAsClass:[NSBitmapImageRep class]];
-    //return NSApplicationMain(argc, argv);
-
     return NSApplicationMain(argc, (const char **)argv);
 }
 

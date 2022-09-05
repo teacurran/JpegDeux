@@ -20,7 +20,6 @@
 		93A31A3E171A3B4400528ABE /* WindowMovingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E53CF8038BA75901FD9FBC /* WindowMovingTextField.m */; };
 		93A31A3F171A3B4400528ABE /* BetterTable.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B329580200F14901FDC0B7 /* BetterTable.m */; };
 		93A31A40171A3B4400528ABE /* MutableArrayCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B329670200F14901FDC0B7 /* MutableArrayCategory.m */; };
-		93A31A41171A3B4400528ABE /* FixedBitmapImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B3295C0200F14901FDC0B7 /* FixedBitmapImageRep.m */; };
 		93A31A42171A3B4400528ABE /* StringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B3296C0200F14901FDC0B7 /* StringAdditions.m */; };
 		93A31A43171A3B4400528ABE /* KeyBindingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = F52D57EE02D035A401CCFEE7 /* KeyBindingTable.m */; };
 		93A31A44171A3B4400528ABE /* ObjectAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F52D57F202D0517101CCFEE7 /* ObjectAdditions.m */; };
@@ -127,8 +126,6 @@
 		F5B329580200F14901FDC0B7 /* BetterTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BetterTable.m; path = Classes/BetterTable.m; sourceTree = "<group>"; };
 		F5B329590200F14901FDC0B7 /* DockShow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DockShow.h; sourceTree = "<group>"; };
 		F5B3295A0200F14901FDC0B7 /* DockShow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DockShow.m; sourceTree = "<group>"; };
-		F5B3295B0200F14901FDC0B7 /* FixedBitmapImageRep.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FixedBitmapImageRep.h; path = Classes/FixedBitmapImageRep.h; sourceTree = "<group>"; };
-		F5B3295C0200F14901FDC0B7 /* FixedBitmapImageRep.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FixedBitmapImageRep.m; path = Classes/FixedBitmapImageRep.m; sourceTree = "<group>"; };
 		F5B3295D0200F14901FDC0B7 /* Master.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Master.h; sourceTree = "<group>"; };
 		F5B3295E0200F14901FDC0B7 /* Master.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Master.m; sourceTree = "<group>"; };
 		F5B3295F0200F14901FDC0B7 /* ScreenShow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenShow.h; sourceTree = "<group>"; };
@@ -306,8 +303,6 @@
 				F5B329580200F14901FDC0B7 /* BetterTable.m */,
 				F5B329660200F14901FDC0B7 /* MutableArrayCategory.h */,
 				F5B329670200F14901FDC0B7 /* MutableArrayCategory.m */,
-				F5B3295B0200F14901FDC0B7 /* FixedBitmapImageRep.h */,
-				F5B3295C0200F14901FDC0B7 /* FixedBitmapImageRep.m */,
 				F5B3296B0200F14901FDC0B7 /* StringAdditions.h */,
 				F5B3296C0200F14901FDC0B7 /* StringAdditions.m */,
 				F52D57EF02D035A401CCFEE7 /* KeyBindingTable.h */,
@@ -404,6 +399,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* JPEGShow */;
@@ -447,7 +443,6 @@
 				93A31A3E171A3B4400528ABE /* WindowMovingTextField.m in Sources */,
 				93A31A3F171A3B4400528ABE /* BetterTable.m in Sources */,
 				93A31A40171A3B4400528ABE /* MutableArrayCategory.m in Sources */,
-				93A31A41171A3B4400528ABE /* FixedBitmapImageRep.m in Sources */,
 				93A31A42171A3B4400528ABE /* StringAdditions.m in Sources */,
 				93A31A43171A3B4400528ABE /* KeyBindingTable.m in Sources */,
 				93A31A44171A3B4400528ABE /* ObjectAdditions.m in Sources */,

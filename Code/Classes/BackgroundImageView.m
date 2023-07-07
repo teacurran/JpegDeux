@@ -13,7 +13,7 @@
 - (id)initWithFrame:(NSRect)frame {
     if (self=[super initWithFrame:frame]) {
         myBackgroundColor=[NSColor blackColor];
-        myScaling=NSScaleNone;
+        myScaling=ScaleNone;
         myNameAttributes=[[NSDictionary alloc] initWithObjectsAndKeys:
             [NSColor whiteColor], NSForegroundColorAttributeName,
             [NSColor blackColor], NSBackgroundColorAttributeName,
@@ -51,14 +51,14 @@
         case ScaleDownToFit:
             if (size.height < mySize.height && size.width < mySize.width) return size;
             //note fall through
-        case NSScaleToFit: return mySize;
+        case ScaleToFit: return mySize;
 
-        case NSScaleNone: return size;
+        case ScaleNone: return size;
 
         case ScaleDownProportionally:
             if (size.height < mySize.height && size.width < mySize.width) return size;
             //note fall through
-        case NSScaleProportionally:
+        case ScaleProportionally:
             if (size.height*mySize.width > size.width * mySize.height) {
                 //image is too tall
                 size.width*=mySize.height/size.height;
@@ -75,27 +75,26 @@
     }
 }
 
+- (NSTextField *)myImageLabel {
+    if (!_myImageLabel) {
+        _myImageLabel = [[NSTextField alloc] initWithFrame:NSZeroRect];
+        [_myImageLabel setBezeled:NO];
+        [_myImageLabel setDrawsBackground:NO];
+        [_myImageLabel setEditable:NO];
+        [_myImageLabel setSelectable:NO];
+        [_myImageLabel setTextColor:[NSColor whiteColor]];
+        [self addSubview:_myImageLabel];
+    }
+    return _myImageLabel;
+}
 
 - (void)drawImageName:(NSRect)rect {
     if (myImageName) {
         NSSize size=[myImageName sizeWithAttributes:NULL];
-		
-		NSRect imageLabelRect = NSMakeRect(0, 0, NSMaxX(rect), size.height);
-		
-		if (myImageLabel) {
-			[myImageLabel removeFromSuperview];
-		}
-		
-		myImageLabel = [[NSTextField alloc] initWithFrame:imageLabelRect];
-		[myImageLabel setStringValue:myImageName];
-		[myImageLabel setBezeled:NO];
-		[myImageLabel setDrawsBackground:NO];
-		[myImageLabel setEditable:NO];
-		[myImageLabel setSelectable:NO];
-		[myImageLabel setTextColor:[NSColor whiteColor]];
-		
-		[self addSubview:myImageLabel];
 
+        NSRect imageLabelRect = NSMakeRect(0, 0, NSMaxX(rect), size.height);
+        [self.myImageLabel setFrame:imageLabelRect];
+        [self.myImageLabel setStringValue:myImageName];
     }
 }
 

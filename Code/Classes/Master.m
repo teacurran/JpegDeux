@@ -463,7 +463,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 				}
 				
                 do {
-                    event=[application nextEventMatchingMask: NSAnyEventMask
+                    event=[application nextEventMatchingMask: NSEventMaskAny
                                                    untilDate:finishDate
                                                       inMode:NSDefaultRunLoopMode
                                                      dequeue:YES];

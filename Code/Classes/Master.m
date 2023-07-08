@@ -30,12 +30,27 @@ const short StopSlideshowEventType=15;
 
 static NSData* archive(NSColor* c) {
     if (! c) c = [NSColor blackColor];
-    return [NSArchiver archivedDataWithRootObject:c];
+    
+    NSError *error = nil;
+    NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:c requiringSecureCoding:NO error:&error];
+    if (error) {
+        NSLog(@"Error archiving data: %@", error);
+    }
+    return archivedData;
 }
 
 static NSColor* unarchive(NSData* data) {
-    if (! data) return [NSColor blackColor];
-    else return [NSUnarchiver unarchiveObjectWithData:data];
+    if (! data) return NSColor.blackColor;
+    else {
+        NSError *error = nil;
+        NSColor *unarchivedColor = [NSKeyedUnarchiver unarchivedObjectOfClass:NSColor.class fromData:data error:&error];
+
+        if (error) {
+            NSLog(@"Error unarchiving data: %@", error);
+            return NSColor.blackColor;
+        }
+        return unarchivedColor;
+    }
 }
 
 static Master* sharedMaster;
@@ -190,7 +205,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     [panel setCanChooseFiles:YES];
 	
 	[panel setDirectoryURL:[[NSURL alloc] initWithString:startingDirectory]];
-	[panel setAllowedFileTypes:[NSImage imageFileTypes]];
+    [panel setAllowedFileTypes:[NSImage imageTypes]];
 	[panel beginSheetModalForWindow:[myFilesTable window] completionHandler:^(NSInteger returnCode)
 	{
 		[self openPanelDidEnd:panel returnCode:returnCode contextInfo:NULL];
@@ -211,7 +226,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 
 - (void)openPanelDidEnd:(NSOpenPanel*)panel returnCode:(NSUInteger)returnCode contextInfo:(void*)contextInfo {
     NSUserDefaults* defaults=[NSUserDefaults standardUserDefaults];
-    if (returnCode == NSOKButton) {
+    if (returnCode == NSModalResponseOK) {
         NSArray* filesToOpen = [panel URLs];
         if ([filesToOpen count] > 0) {
             [defaults setObject:[[filesToOpen[0] absoluteString] stringByDeletingLastPathComponent] forKey:@"DefaultImageDirectory"];
@@ -339,7 +354,7 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 	[panel setDirectoryURL: directory];
     NSUInteger result = (NSUInteger) [panel runModal];
 			
-    if (result==NSOKButton) [self openSlideshowWithUrl:[[panel URLs] objectAtIndex:0]];
+    if (result==NSModalResponseOK) [self openSlideshowWithUrl:[[panel URLs] objectAtIndex:0]];
 }
 
 - (IBAction)saveDocument:(id)sender {
@@ -377,10 +392,11 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 }
 
 - (IBAction)saveDocumentAs:(id)sender {
-    NSSavePanel* panel=[NSSavePanel savePanel];
-    NSInteger result=[panel runModal];
-    if (result==NSFileHandlingPanelOKButton) {
-        myCurrentSavingPath=[[[panel URL] absoluteString] copy];
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    NSInteger result = [panel runModal];
+    if (result == NSModalResponseOK) {
+        NSURL *url = panel.URL;
+        myCurrentSavingPath = url.absoluteString.copy;
         [self saveDocument:sender];
     }
 }
@@ -401,8 +417,8 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
     myCurrentShow=[[myDisplayModeClass alloc] initWithParams:[myTransitionChooser valueDictionary]];
     NS_DURING
 	
-    if (myShouldOnlyScaleDown && myScaling==NSScaleProportionally) [myCurrentShow setImageScaling:ScaleDownProportionally];
-    else if (myShouldOnlyScaleDown && myScaling==NSScaleToFit) [myCurrentShow setImageScaling:ScaleDownToFit];
+    if (myShouldOnlyScaleDown && myScaling==ScaleProportionally) [myCurrentShow setImageScaling:ScaleDownProportionally];
+    else if (myShouldOnlyScaleDown && myScaling==ScaleToFit) [myCurrentShow setImageScaling:ScaleDownToFit];
     else [myCurrentShow setImageScaling:myScaling];
     [myCurrentShow setCommentStyle:myCommentDisplay];
     [myCurrentShow setFileNameDisplayType:myFileNameDisplay];
@@ -501,16 +517,17 @@ static NSMutableArray* unaliasIfNecessary(NSArray* array) {
 - (EventAction)handleEvent:(NSEvent*)event {
     NSEventType type=[event type];
     //NSLog([event description]);
-    if (type==NSKeyDown) {
+    if (type==NSEventTypeKeyDown) {
         unichar theChar=[[event characters] characterAtIndex:0];
         id param=NULL;
         SEL sel=[myPrefsManager selectorForKey:theChar withParam:&param];
-        if (theChar=='.' && ([event modifierFlags] & NSCommandKeyMask)) return eStop;
+        if ([event.characters isEqualToString:@"."] && ([event modifierFlags] & NSEventModifierFlagCommand)) {
+            return eStop;
+        }
         if (sel) return [self intPerformSelector:sel withObject:param];
     }
-    else if (type==NSApplicationDefined) {
-        if ([event subtype]==StopSlideshowEventType)
-            return eStop;
+    else if (type == NSEventTypeApplicationDefined && event.subtype == StopSlideshowEventType) {
+        return eStop;
     }
     [application sendEvent:event];
     return eNothing;
